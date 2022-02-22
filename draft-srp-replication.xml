@@ -321,7 +321,7 @@ uint32_t key_id(uint8_t *key_data, int key_len) {
     <section>
       <name>Protocol Details</name>
       <t>The DNS-SD SRP Replication Protocol (henceforth SRPL) is based on <xref target="RFC8490">DNS Stateful Operations</xref>. Each SRP replication partner creates a listener on port 853, the <xref target="RFC7858">DNS-over-TLS</xref> reserved port. This listener can be used for other DNS requests as well.</t>
-      <t>Participants in the protocol are partners. To distinguish between partners, the terms "partner" and "partner" are used. "Partner" refers to the partner that is communicating or receiving communication. "Partner" refers to the other partner. Partners can be clients or servers: a partner that has established a connection to a partner is a client; a partner that has received a connection from a partner is a server.</t>
+      <t>Participants in the protocol are partners. To distinguish between partners, the terms "partner" and "remote partner" are used. "Partner" refers to the partner that is communicating or receiving communication. "Remote partner" refers to the other partner. Partners can be clients or servers: a partner that has established a connection to another one is a client; a partner that has received a connection from another one is a server.</t>
 
       <section>
         <name>DNS Stateful Operations considerations</name>
@@ -345,7 +345,7 @@ uint32_t key_id(uint8_t *key_data, int key_len) {
           <t>DSO-TYPE code: SRPLSession. Introduces the SRPL session. The SRPL session TLV contains no data, just the type and length.  SRPL Session primary TLV requests do not include any secondary TLVs. SRPL Session requests are DSO requests: the recipient is expected to send a response TLV. Both request and response TLVs have the same format. An SRPL Session response may include an SRPL Precedence secondary TLV.</t>
           <section>
             <name>SRPL client behavior</name>
-            <t>The SRPL Session request is sent by a partner acting as a client to its partner once the TLS connection to the partner, acting as a server, has succeeded. The SRPL session message establishes the DSO connection as an SRP protocol connection. If it is the first DSO message sent by the partner acting as a client, then it also establishes the DSO session.</t>
+            <t>The SRPL Session request is sent by a partner acting as a client to its remote partner once the TLS connection to the partner, acting as a server, has succeeded. The SRPL session message establishes the DSO connection as an SRP protocol connection. If it is the first DSO message sent by the partner acting as a client, then it also establishes the DSO session.</t>
             <t>When the SRPL partner acting as a client receives a response to its SRPL session message, it sends an SRPL Send Candidates message.</t>
             <t>When an SRPL partner receives an SRPL Precedence secondary TLV in an SRPL Session response, if it thinks it is connected to the primary partner, it sets its precedence to the assigned value. If it thinks it is connecting to a non-primary, then it disconnects and waits NON_PRIMARY_RESETTLE_TIME seconds before reconnecting. It also attempts to reconfirm the service advertisement for the partner it thinks is primary.</t>
           </section>
