@@ -55,7 +55,7 @@
           <ul>
             <li>An host must be available to act as a primary authoritative DNS server</li>
             <li>The zone advertised by that server must be delegated, so that the local resolver can successfully answer queries in that zone</li>
-            <li>The local resolver must be able to provide local browsing domain advertisements [RFC6763 section 11].</li>
+            <li>The local resolver must be able to provide local browsing domain advertisements (<xref target="RFC6763" section="11"/>).</li>
           </ul>
 
         </section>
@@ -153,9 +153,9 @@
       <section anchor="advertising-ones-own-replication-service">
         <name>Advertising one's own replication service</name>
 
-        <t>An SRP replication service advertises its replication service after it is finishes the partner discovery phase as specified in <xref target="partner-discovery-phase"/>.</t>
+        <t>An SRP replication service operating in the "routine operation" state (<xref target="routine-operation"/>) advertises its replication service.</t>
 
-        <t>SRP replication service is advertised using DNS-SD [RFC6763]. The service name is '_srpl-tls._tcp'. Each SRP replication partner should have its own hostname, which when combined with the service instance name and the local DNS-SD domain name will produce a service instance name, for example 'example-host._srpl-tls._tcp.local.' The domain under which the service instance name appears will be 'local' for mDNS, and will be whatever domain is used for service registration in the case of a non-mDNS local DNS-SD service.</t>
+        <t>SRP replication service is advertised using DNS-SD <xref target="RFC6763"/>. The service name is '_srpl-tls._tcp'. Each SRP replication partner should have its own hostname, which when combined with the service instance name and the local DNS-SD domain name will produce a service instance name, for example 'example-host._srpl-tls._tcp.local.' The domain under which the service instance name appears will be 'local' for mDNS, and will be whatever domain is used for service registration in the case of a non-mDNS local DNS-SD service.</t>
 
         <t>SRP replication uses <xref target="RFC7858">DNS port 853</xref> and is based on <xref target="RFC8490">DNS Stateful Operations</xref>. Therefore, the SRV record for the example we've given would be:</t>
 
@@ -163,13 +163,13 @@
 
         <t>The TXT record for SRP replication advertises the following fields:</t>
         <dl>
-          <dt>did</dt><dd> dataset ID as a 64-bit number encoded as hexadecimal ASCII. The dataset ID is used by SRP servers to establish a common SRP dataset for a domain as described in <xref target="dataset-id"/>.</dd>
+          <dt>did</dt><dd>a 64-bit number encoded as hexadecimal ASCII. The dataset ID used by SRP servers to establish a common SRP dataset for a domain as described in <xref target="dataset-id"/>.</dd>
           <dt>join</dt><dd>'yes' or 'no'. Indicates whether other SRP replication servers are invited to join in replicating the dataset.</dd>
-          <dt>pid</dt><dd>partner ID as a 64-bit number encoded as hexadecimal ASCII as described in <xref target="partner-id"/>.</dd>
+          <dt>pid</dt><dd>a 64-bit number encoded as hexadecimal ASCII. The partner ID to uniquely identify a SRP partner, as described in <xref target="partner-id"/>.</dd>
           <dt>dn</dt><dd>the domain name that this dataset is intended to represent</dd>
         </dl>
 
-        <t>So in our example the TXT record might look like this:</t>
+        <t>So in our example, the TXT record might look like this:</t>
 
         <t>\031dn=openthread.thread.home.arpa.\020did=eb5bb51919a15cec\020pid=2cde2bed200126af\008join=yes</t>
 
@@ -184,37 +184,38 @@
         <t>An SRP Replication Partner MUST maintain an ongoing DNS-SD browse on the service name '_srpl-tls._tcp' within the local browsing domain. The ongoing browse will produce two different types of events: 'add' events and 'remove' events. When the browse is started, it should produce an 'add' event for every SRP replication partner currently present on the network, including the partner that is doing the browsing. Whenever a partner goes offline, a 'remove' event should be produced. 'remove' events are not guaranteed, however.</t>
 
         <t>When a new service is added, the SRP partner checks to see if it is in a compatible domain. If the SRP partner has a domain to advertise, it compares that domain to the domain advertised in the added service instance: if they are not the same, then this instance is not a candidate for connection, and should be ignored.</t>
+
       </section>
 
-      <section anchor="partner-discovery-phase">
-        <name>Partner discovery phase</name>
-        <t>When a partner starts SRP Replication, it enters discovery phase. It picks a random discovery time interval uniformly selected from range MIN_PARNTER_DISCOVERY_INTERVAL up to MAX_PARTNER_DISCOVERY_INTERVAL. The recommended minimum and maximum value is 4 and 7.5 seconds.</t>
+      <section anchor="startup">
+        <name>Startup</name>
 
-        <t>The partner spends the selected interval to discover partners to sync and domain name if it does not have one. It can itself start advertising replication service and start acting as an SRP server only after this discover time is passed and it either successfully synchronized or attempted to synchronize and failed for at least NUM_DISCOVERY_SYNC_ATTAMPETS times with each partner it discovered during the discovery interval.</t>
+        <t>When a partner starts SRP Replication, it enters the "startup" state and picks a random discovery time interval uniformly selected from the range [MIN_PARNTER_DISCOVERY_INTERVAL, MAX_PARTNER_DISCOVERY_INTERVAL]. The recommended minimum and maximum values are 4 and 7.5 seconds, respectively.</t>
 
-        <t>If no other partner is discovered by end of the interval, the SRP partner determines that it is the only or the first partner. It then generates the Dataset ID using the process described in <xref target="dataset-id"/>. If the SRP partner does not have a domain name then it MUST also select a zone name using one of the methods mentioned previously in <xref target="naming-of-a-common-service-zone"/>. It can then start advertising the replication service as mentioned in <xref target="advertising-ones-own-replication-service"/>.</t>
+        <t>When the discovery time interval expires, the SRPL partner transitions to the "routine operation" state (<xref target="routine-operation"/>) after it has either successfully synchronized with or NUM_DISCOVERY_SYNC_ATTEMPTS have occurred with each discovered partner. If the partner did not discover any other SRPL partners to synchronize with, it immediately transitions to the "routine operation" state.</t>
 
-        <t>If the SRP partner does not have a domain to advertise and is therefore willing to join an existing domain, when it discovers a partner it checks to see if the TXT record for the service indicates that joining is permitted. If so, the SRP partner adopts the provided domain name.</t>
-      </section>
+        <section>
+          <name>Determining an SRP zone name</name>
 
-      <section anchor="partner-id">
-        <name>Partner ID</name>
+          <t>An SRPL partner attempts to synchronize with other partners advertising the same domain. If the SRPL partner is not configured with a domain name, and is therefore willing to join an existing domain, it adopts the first domain name with joining enabled it discovers. During the remainder of the discovery time interval, the SRPL partner attempts to synchronize with other partners advertising the same domain name. When the SRPL partner transitions to the "routine operation" state, it will advertise the adopted domain name and sets the 'join=yes' key/value pair in the TXT record.</t>
 
-        <t>The partner ID is a 64-bit number associated with an SRP replication partner. Upon staring SRP replication operation, the partner generates a random ID using a high-quality random number generator [RFC4086]. The partner ID does not need to be persisted over SRP replication restarts. If partner restarts SRP replication operation it MUST select a new random ID.</t>
+          <t>When the discovery time interval expires, if the SRPL partner is not configured with a domain name and was not able to adopt a domain name, it MUST select a zone name using one of the methods mentioned previously in <xref target="naming-of-a-common-service-zone"/>.</t>
 
-        <t>With ID being randomly generated 64-bit number, the likelihood of ID conflict is small. However, if an SRP partner discovers another partner using the same ID, the partner restarts SRP replication operation which trigger it to pick a new random ID.</t>
-      </section>
+        </section>
 
-      <section anchor="dataset-id">
-        <name>Dataset ID</name>
+        <section anchor="dataset-id">
+          <name>Determining a Dataset ID</name>
 
-        <t>The dataset ID is a 64-bit number, generated by the first partner to offer that dataset. There should always be exactly one dataset ID per domain, but the dataset ID has a separate purpose: it represents the set of data that is being replicated by a set of cooperating SRP replication partners. This data is then offered under the agreed-upon domain, but it's possible that there might be several sets of SRP replication partners that agree to replicate a particular domain, and then some event occurs which renders these partners visible to each other. When this happens, the independent sets of partners must converge on a single dataset. This is done using the dataset ID.</t>
+          <t>The dataset ID is a 64-bit number that identifies the set of data replicated by a set of cooperating SRPL partners. Ideally, there should be exactly one dataset ID per domain. However, it is possible for several independent sets of SRPL partners to replicate a particular domain, for example when some SRPL partners are unable to discover each other. When the SRPL partners are able to discover each other again, the sets of partners must converge on a single dataset using the dataset ID.</t>
 
-        <t>When more than one dataset ID is present for a particular domain, the mechanism below is used to select an ID as the preferred ID. The SRP replication partners that are currently replicating a dataset with a non-preferred dataset ID will have to abandon that dataset and join together in replicating the preferred dataset.</t>
+          <t>If an SRPL partner does not discover any other partners advertising the same domain in the "startup" state <xref target="startup"/>, it generates a new dataset ID when entering the "routine operation" state. SRPL partners MUST persist the highest (most significant byte or MSB) of the dataset ID in non-volatile memory. When generating a new dataset ID, the partner MUST increment the MSB of last used dataset ID to use as MSB of new dataset ID and populate the lower 56 bits randomly using a high-quality random number generator <xref target="RFC4086"/>. If there is no previously saved ID, then the partner randomly generates the entire 64-bit ID.</t>
 
-        <t>If there are two dataset IDs, the one that is numerically larger in the sense as defined in serial number arithmetic <xref target="RFC1982"/> is preferred. If there are multiple IDs, again the ID that is numerically largest is preferred. However, using the serial number comparison with three or more IDs, it is possible though unlikely that the largest value may not be well-defined. For example, it is possible to have three IDs each being larger (in serial number sense) than another one. In such a situation where the largest in serial number sense is not well-defined, the ID that is largest in the normal numerical comparison sense is preferred.</t>
+          <t>When multiple dataset IDs exist for a given domain, the largest dataset ID is the preferred dataset ID. Implementations MUST follow the Serial Number Arithmetic as defined in <xref target="RFC1982"/> when comparing two dataset IDs. When using Serial Number Arithmetic with three or more IDs, it is possible that the largest value may not be well-defined (it is possible to have three IDs each being "larger" than another one). In this case, the dataset ID that is largest using absolute value comparison is the preferred dataset ID.</t>
 
-        <t>If an SRP partner determines that it is the first partner to offer the dataset, it generates the dataset ID. SRP partners MUST persist the last used dataset ID or the highest (most significant byte or MSB) of the ID associated with same domain in non-volatile memory. When generated a new dataset ID, partner increment  the MSB of last used ID to use as MSB of new ID and populates the lower 56-bit randomly using a high-quality random number generator [RFC4086]. If there is no previously saved ID, then the entire 64-bit ID is generated randomly.</t>
+          <t>If at any time (regardless of "startup" or "routine operation" state) an SRPL partner discovers that it is synchronizing with a non-preferred dataset ID, it MUST abandon that dataset, re-enter the "startup" state, and attempt to synchronize with the (newly discovered) preferred dataset id.</t>
+
+        </section>
+
       </section>
 
       <section anchor="discovering-the-addresses-of-partners">
@@ -223,16 +224,28 @@
         <t>When a partner is discovered, two new ongoing mDNS queries are started on the hostname indicated in the SRV record of the partner: one for A records, and one for AAAA records. Each time an address 'add' event is seen, either for an 'A' record or an 'AAAA' record, the partner adds the address to the list of addresses belonging to that partner.</t>
 
       </section>
+
+      <section anchor="partner-id">
+        <name>Partner ID</name>
+
+        <t>The partner ID is a 64-bit number associated with an SRPL partner. Upon entering the "startup" state, the partner MUST generate a random ID using a high-quality random number generator <xref target="RFC4086"/>. If a partner restarts SRP replication operation it MUST select a new random ID.</t>
+
+        <t>The likelihood of partner ID conflict is small. However, if an SRPL partner discovers another partner using the same ID, the partner MUST restart SRP replication operation, which triggers it to pick a new random ID.</t>
+
+      </section>
+
       <section anchor="establishing-communication-with-a-replication-partner">
         <name>Establishing Communication with a replication partner</name>
 
         <t>When an address is added to a partner's address list, the partner first checks to see if the address is one of its own addresses. If so, then the partner is marked "me", and no connection is attempted to it. This is somewhat safer than comparing hostnames, since a hostname collision can result in renaming.</t>
 
-        <t>If the partner is not marked 'me', then the partner checks to see if it has an existing connection to that partner. If it does not, then it checks to see whether it has disabled outgoing connections to that partner. If not, then it determines whether it should initiate a connection on the new address.</t>
+        <t>If the partner is not marked "me", then the partner checks to see if it has an existing connection to that partner. If it does not, then it checks to see whether it has disabled outgoing connections to that partner. If not, then it determines whether it should initiate a connection on the new address.</t>
 
-        <t>While a partner is in discovery phase as described in <xref target="partner-discovery-phase"/> it initiates connection with the other discovered partners. While in this phase the partner does not yet advertise SRP replication service so other partners cannot discover it over DNS-SD. If the partner is not in discover phase then partner IDs are used to determine which partner should initiate the connection. The partner with numerically larger ID in the sense as defined in serial number arithmetic <xref target="RFC1982"/> initiates connection with the one with smaller ID.</t>
+        <t>While a partner is in the "startup" state (<xref target="startup"/>) it initiates connections with the other discovered partners. In the "startup" state, the partner does not advertise its SRP replication service so other partners cannot discover it over DNS-SD.</t>
 
-        <t>When a connection fails and if there are multiple addresses associated with partner, the connecting partner  advances to the next address in the list. If there are no remaining addresses, the partner sets a timer for RECONNECT_INTERVAL seconds. When this timer expires, it starts again at the beginning of the list and attempts to connect to the first address, iterating again across the list until a connection succeeds or it runs out of addresses.</t>
+        <t>If the partner is in the "routine operation" state, it uses the partner ID to determine which partner should initiate the connection. If the partner determines that its own partner ID is larger, it MUST initiate the connection. Otherwise, the partner MUST NOT initiate the connection. Implementations MUST follow the Serial Number Arithmetic as defined in <xref target="RFC1982"/> when comparing two partner IDs.</t>
+
+        <t>When a connection fails and if there are multiple addresses associated with partner, the connecting partner advances to the next address in the list. If there are no remaining addresses, the partner sets a timer for RECONNECT_INTERVAL seconds. When this timer expires, it starts again at the beginning of the list and attempts to connect to the first address, iterating again across the list until a connection succeeds or it runs out of addresses.</t>
 
         <t>Additionally, when an address is added, it is checked against the list of unidentified incoming connections. If a match is found, and the partner is marked "me," then the unidentified connection is removed from the list and dropped. Otherwise, it is attributed to the matching partner, and the protocol is started at the point of receiving an incoming connection.</t>
 
@@ -240,15 +253,15 @@
       <section anchor="incoming-connections">
         <name>Incoming connections</name>
 
-        <t>When an incoming connection is received, it is checked against the partner list based on the source address of the incoming connection. If the address appears on the list of addresses for a partner, then the connection is attributed to that partner. If there is already an existing connection with the same partner, the existing connection will be marked as stable and can closed.</t>
+        <t>When an incoming connection is received, it is checked against the partner list based on the source address of the incoming connection. If the address appears on the list of addresses for a partner, then the connection is attributed to that partner. If there is already an existing connection attributed to the same partner, the partner processing the incoming connection MUST immediately close the existing connection.</t>
 
       </section>
       <section anchor="initial-synchronization">
         <name>Initial synchronization</name>
 
-        <t>The connecting partner begins the session by sending a session message which includes its partner ID and also indicating whether or not it is a "new partner" and still in discovery phase. The receiving partner waits to receive such a message. If the message indicates that the connecting partner is a "new partner", the connection is accepted. Otherwise, the receiving partner checks the partner IDs as described in <xref target="establishing-communication-with-a-replication-partner" /> to validate that the its partner ID is numerically smaller (in the sense as defined in serial number arithmetic <xref target="RFC1982"/>) than the connecting partner's ID. If the connection survives the comparison, then the partner sends a response to the session message and waits for the connecting partner to request a list of update candidates.</t>
+        <t>The connecting partner begins the session by sending an SRPL Session message, which includes its partner ID and indicates whether or not it is in the "startup" state. The receiving partner waits to receive the SRPL Session message. If the message indicates that the connecting partner is in the "startup" state, the receiving partner accepts the connection. Otherwise, the receiving partner compares the partner IDs as described in <xref target="establishing-communication-with-a-replication-partner" /> and accepts the connection if its partner ID is smaller than the connecting partner's ID. If the receiving partner accepts the connection, it MUST send a response to the SRPL Session message and waits for the connecting partner to request a list of update candidates.</t>
 
-        <t>The connecting partner waits for a response to the initial session message, and when it is received, requests that the server send candidates.</t>
+        <t>The connecting partner waits for a response to the SRPL Session message, and when it is received, requests that the server send candidates.</t>
 
         <section anchor="sending-candidates">
           <name>Sending candidates</name>
@@ -313,23 +326,30 @@ uint32_t key_id(uint8_t *key_data, int key_len) {
       <section>
         <name>SRPL Messages</name>
 
-        <t>SRPL uses DSO message format where a message begins with a primary TLV and can contain secondary TLVs with additional information (<xref target="RFC8490" section="5.4"/>). SRPL uses DSO request and response message types. The recipient of a request is expected to send a response message with same primary TLV. SRPL does not define or use any unidirectional DSO message.</t>
+        <t>SRPL uses the DSO message format. Each message begins with a Primary TLV and may contain secondary TLVs with additional information (<xref target="RFC8490" section="5.4"/>). SRPL uses DSO request and response message types. A partner receiving a DSO request is expected to send a DSO response with same Primary TLV. SRPL does not define or use any unidirectional DSO message.</t>
 
-        <t>To ensure future compatibility, when processing a received SRPL message, any unrecognized secondary TLV or additional TLV value in the currently defined SRPL TLVs MUST be silently ignored, and the remainder of the message is interpreted and handled as if the unrecognized parts were not present (<xref target="RFC8490" section="5.4.5"/>). However, if an received SRPL message does not follow the required format and policies specified below (for example, it does not include a required secondary TLV or it is received at incorrect time or sent by incorrect partner) it MUST be treated as a "fatal error" and the connection MUST be forcibly aborted immediately as in <xref target="RFC8490" section="5.3.1"/>).</t>
+        <t>To ensure future compatibility, when processing a received SRPL message, any unrecognized secondary TLVs or additional value in currently defined SRPL TLVs MUST be silently ignored, and the message is interpreted and handled as if the unrecognized parts were not present (<xref target="RFC8490" section="5.4.5"/>). However, if a partner receives an SRPL message that does not satisfy the message format and processing rules specified below, it MUST treat this as a "fatal error" and forcibly abort the connection immediately (<xref target="RFC8490" section="5.3.1"/>).</t>
 
-        <t>The SRPL messages and their corresponding primary TLVs used in the SRPL protocol are as follows:</t>
+        <t>The SRPL messages and their corresponding Primary TLVs are as follows:</t>
         <section>
           <name>SRPL Session</name>
-          <t>DSO-TYPE code: SRPLSession. Introduces the SRPL session. The SRPL session TLV contains the partner ID as an unsigned 64-bit value. SRPL Session requests can optionally include SRPL New Partner TLV as a secondary TLV. The inclusion of the SRPL New Partner TLV indicates whether the partner is a new partner and still in its discovery phase. SRPL Session request MUST only be sent by the partner acting as a client.</t>
+          <t>DSO-TYPE code: SRPLSession. Introduces the SRPL session. The SRPL session TLV contains the partner ID as an unsigned 64-bit value. A SRPL Session request may include an SRPL New Partner secondary TLV. Inclusion of the SRPL New Partner TLV indicates whether the partner is in the "startup" state.</t>
           <section>
             <name>SRPL client behavior</name>
-            <t>The SRPL Session request is sent by a partner acting as a client to its remote partner once the TLS connection to the partner, acting as a server, has succeeded. The SRPL session message establishes the DSO connection as an SRPL protocol connection. If it is the first DSO message sent by the partner acting as a client, then it also establishes the DSO session.</t>
-            <t>When the SRPL partner acting as a client receives a response to its SRPL session message from server, it sends an SRPL Send Candidates request message.</t>
+            <t>The SRPL Session request is sent by a partner acting as a client to its remote partner once the TLS connection to the partner, acting as a server, has succeeded. The SRPL Session request establishes the DSO connection as an SRPL protocol connection. If it is the first DSO message sent by the partner acting as a client, then it also establishes the DSO session.</t>
+            <t>When the SRPL partner acting as a client receives a response to its SRPL Session message from server, it MUST send an SRPL Send Candidates request.</t>
           </section>
           <section>
             <name>SRPL server behavior</name>
+
             <t>An SRPL partner acting as a server that receives an SRPL Session request checks to see if the SRPL session on which it was received is already established. If so, this is a protocol error, and the SRPL partner MUST drop the connection.</t>
-            <t>When the server receives an SRPL Session request, it checks the presence of SRPL New Partner secondary TLV. If this secondary TLV is included in the Session request, then sever sends a Session response. If the SRPL New partner is not present, then the server checks the partner IDs and validates that the its partner ID is numerically smaller (in the sense as defined in serial number arithmetic <xref target="RFC1982"/>) than the client's partner ID from the Session TLV in the request. If the connection survives the ID comparison, then its sends a Session response.</t>
+
+            <t>If the SRPL Session request is establishing a new session, the server MUST send a SRPL Session response if either of the following conditions are satisfied:</t>
+            <ul>
+              <li>The SRPL Session request contains an SRPL New Partner secondary TLV.</li>
+              <li>The SRPL Session request contains a partner ID that is larger than the server's (see <xref target="establishing-communication-with-a-replication-partner" />).</li>
+            </ul>
+            <t>If none of these conditions are satisfied, this is a protocol error, and the SRPL partner MUST drop the connection.</t>
           </section>
         </section>
 
@@ -355,7 +375,7 @@ uint32_t key_id(uint8_t *key_data, int key_len) {
           <section>
             <name>Required secondary TLVs</name>
             <t>The SRPL Candidate request MUST include the following secondary TLVs: SRPL Hostname, SRPL Time Offset, and SRPL Key ID.</t>
-            <t>The SRPL Candidate response MUST include exactly one of the following status TLVs: SRPL Candidate Yes, SRPL Candidate No, or SRPL Conflict. If an SRPL partner receives an SRPL Candidate response which does not contain exactly one of these TLVS, this is a protocol error, and the partner MUST drop the connection.</t>
+            <t>The SRPL Candidate response MUST include exactly one of the following status TLVs: SRPL Candidate Yes, SRPL Candidate No, or SRPL Conflict.</t>
           </section>
           <section>
             <name>SRPL partner common behavior</name>
@@ -373,7 +393,7 @@ uint32_t key_id(uint8_t *key_data, int key_len) {
           <section>
             <name>Required secondary TLVs</name>
             <t>The SRPL Host request MUST include the following secondary TLVs: SRPL Hostname, SRPL Key ID, and one or more SRPL Host Message TLVs. If an SRPL partner receives an SRPL Candidate request that doesn't contain all of these secondary TLVs, this is a protocol error, and the partner MUST drop the connection.</t>
-          <t>The SRPL Host request MUST always include at least one SRPL Host Message TLV, which contains the most recent update the SRP server has received for that host. However, in some cases an update for a host may update some, but not all, service instances that reference that host; in this case, the SRPL Host request MUST include all of the previously received SRP updates that would be required to reconstruct the current state of the host registration on the server sending the SRPL Host request. The SRPL Host Message TLVs MUST be included in order based on the time offset they were received and processed on the SRP server starting with the earliest message and ending with most recent one.</t>
+            <t>The SRPL Host request MUST always include at least one SRPL Host Message TLV, which contains the most recent update the SRP server has received for that host. However, in some cases an update for a host may update some, but not all, service instances that reference that host; in this case, the SRPL Host request MUST include all of the previously received SRP updates that would be required to reconstruct the current state of the host registration on the server sending the SRPL Host request. SRPL Host Message TLVs MUST be ordered starting with the largest time offset and ending with the smallest time offset.</t>
           </section>
           <section>
             <name>SRPL partner common behavior during synchronization</name>
@@ -396,17 +416,17 @@ uint32_t key_id(uint8_t *key_data, int key_len) {
         <t>In addition to the Primary TLVs used to send requests between SRPL partners, we define secondary TLVs to carry additional information needed for various SRPL requests.</t>
         <section>
           <name>SRPL Candidate Yes</name>
-          <t>DSO-TYPE code: SRPLCandidateYes. It contains no value, just the type length. In an SRPL Candidate response, indicates to the partner that an SRPL Host message for the candidate is wanted and should be sent.</t>
+          <t>DSO-TYPE code: SRPLCandidateYes. It contains no value. In an SRPL Candidate response, indicates to the partner that an SRPL Host message for the candidate is wanted and should be sent.</t>
           <t>Appears as a secondary TLV in SRPL Candidate responses. MUST NOT appear in any other SRPL request or response. MUST NOT appear in addition to either SRPL Conflict or SRPL Candidate No secondary TLVs.</t>
         </section>
         <section>
           <name>SRPL Candidate No</name>
-          <t>DSO-TYPE code: SRPLCandidateNo. It contains no value, just the type length. In an SRPL Candidate response, indicates to the partner that an SRPL Host message for the candidate is not wanted and should not be sent.</t>
+          <t>DSO-TYPE code: SRPLCandidateNo. It contains no value. In an SRPL Candidate response, indicates to the partner that an SRPL Host message for the candidate is not wanted and should not be sent.</t>
           <t>Appears as a secondary TLV in SRPL Candidate responses. MUST NOT appear in any other SRPL request or response. MUST NOT appear in addition to either SRPL Conflict or SRPL Candidate Yes secondary TLVs.</t>
         </section>
         <section>
           <name>SRPL Conflict</name>
-          <t>DSO-TYPE code: SRPLConflict. It contains no value, just the type length. In an SRPL Candidate response, indicates to the partner that an SRPL Host message for the candidate is not wanted and should not be sent. Additionally indicates that the proposed host conflicts with local data. This indication is informative and has no effect on processing.</t>
+          <t>DSO-TYPE code: SRPLConflict. It contains no value. In an SRPL Candidate response, indicates to the partner that an SRPL Host message for the candidate is not wanted and should not be sent. Additionally indicates that the proposed host conflicts with local data. This indication is informative and has no effect on processing.</t>
           <t>Appears as a secondary TLV in SRPL Candidate responses. MUST NOT appear in any other SRPL request or response. MUST NOT appear in addition to either SRPL Candidate Yes or SRPL Candidate No secondary TLVs.</t>
         </section>
         <section>
@@ -428,7 +448,7 @@ uint32_t key_id(uint8_t *key_data, int key_len) {
 
         <section>
           <name>SRPL Time Offset</name>
-          <t>DSO-TYPE code: SRPLTimeOffset. In an SRPL Candidate request, conveys the difference between the time the SRP update was received from the SRP client and the current time on the partner generating the request, in seconds. The time offset value is represented as unsigned 32-bit value</t>
+          <t>DSO-TYPE code: SRPLTimeOffset. In an SRPL Candidate request, conveys the difference between the time the SRP update was received from the SRP client and the current time on the partner generating the request, in seconds. The time offset value is represented as an unsigned 32-bit value</t>
           <t>Required as a secondary TLV in SRPL Candidate requests. MUST NOT appear in any other SRPL request or response.</t>
         </section>
 
@@ -440,7 +460,7 @@ uint32_t key_id(uint8_t *key_data, int key_len) {
 
         <section>
           <name>SRPL New Partner</name>
-          <t>DSO-TYPE code: SRPLNewPartnter. It contains no value, just the type length. If included in an SRPL Session request, it indicates that the partner is new and still in its discovery phase.</t>
+          <t>DSO-TYPE code: SRPLNewPartnter. It contains no value. When included in an SRPL Session request, indicates that the partner is in the "startup" state.</t>
           <t>Can be optionally included as a secondary TLV in SRPL Session requests. MUST NOT appear in any other SRPL request or response.</t>
         </section>
 
@@ -540,6 +560,8 @@ uint32_t key_id(uint8_t *key_data, int key_len) {
       <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml"/>
       <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1982.xml"/>
       <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3172.xml"/>
+      <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4086.xml"/>
+      <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6763.xml"/>
       <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7858.xml"/>
       <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8375.xml"/>
       <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8490.xml"/>

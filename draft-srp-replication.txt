@@ -72,18 +72,19 @@ Table of Contents
        2.1.3.  Zone name based on DNS-SD discovery . . . . . . . . .   6
      2.2.  Advertising one's own replication service . . . . . . . .   7
      2.3.  Discovering other replication services  . . . . . . . . .   8
-     2.4.  Partner discovery phase . . . . . . . . . . . . . . . . .   8
-     2.5.  Partner ID  . . . . . . . . . . . . . . . . . . . . . . .   9
-     2.6.  Dataset ID  . . . . . . . . . . . . . . . . . . . . . . .   9
-     2.7.  Discovering the addresses of partners . . . . . . . . . .  10
-     2.8.  Establishing Communication with a replication partner . .  10
-     2.9.  Incoming connections  . . . . . . . . . . . . . . . . . .  11
-     2.10. Initial synchronization . . . . . . . . . . . . . . . . .  11
-       2.10.1.  Sending candidates . . . . . . . . . . . . . . . . .  12
-     2.11. Routine Operation . . . . . . . . . . . . . . . . . . . .  13
+     2.4.  Startup . . . . . . . . . . . . . . . . . . . . . . . . .   8
+       2.4.1.  Determining an SRP zone name  . . . . . . . . . . . .   9
+       2.4.2.  Determining a Dataset ID  . . . . . . . . . . . . . .   9
+     2.5.  Discovering the addresses of partners . . . . . . . . . .  10
+     2.6.  Partner ID  . . . . . . . . . . . . . . . . . . . . . . .  10
+     2.7.  Establishing Communication with a replication partner . .  10
+     2.8.  Incoming connections  . . . . . . . . . . . . . . . . . .  11
+     2.9.  Initial synchronization . . . . . . . . . . . . . . . . .  11
+       2.9.1.  Sending candidates  . . . . . . . . . . . . . . . . .  12
+     2.10. Routine Operation . . . . . . . . . . . . . . . . . . . .  13
    3.  Protocol Details  . . . . . . . . . . . . . . . . . . . . . .  13
      3.1.  DNS Stateful Operations considerations  . . . . . . . . .  13
-       3.1.1.  DSO Session Establishment . . . . . . . . . . . . . .  13
+       3.1.1.  DSO Session Establishment . . . . . . . . . . . . . .  14
        3.1.2.  DSO Session maintenance . . . . . . . . . . . . . . .  14
      3.2.  SRPL Messages . . . . . . . . . . . . . . . . . . . . . .  14
        3.2.1.  SRPL Session  . . . . . . . . . . . . . . . . . . . .  14
@@ -104,8 +105,7 @@ Table of Contents
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  21
      6.1.  'srpl-tls' Service Name . . . . . . . . . . . . . . . . .  21
      6.2.  DSO TLV type code . . . . . . . . . . . . . . . . . . . .  22
-     6.3.  Registration and Delegation of 'local.arpa' as a
-           Special-Use Domain Name . . . . . . . . . . . . . . . . .  23
+
 
 
 
@@ -114,6 +114,8 @@ Lemon                   Expires 5 September 2022                [Page 2]
 Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
+     6.3.  Registration and Delegation of 'local.arpa' as a
+           Special-Use Domain Name . . . . . . . . . . . . . . . . .  23
    7.  Informative References  . . . . . . . . . . . . . . . . . . .  23
    8.  Normative References  . . . . . . . . . . . . . . . . . . . .  23
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  24
@@ -160,8 +162,6 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    *  The zone advertised by that server must be delegated, so that the
       local resolver can successfully answer queries in that zone
 
-   *  The local resolver must be able to provide local browsing domain
-      advertisements [RFC6763 section 11].
 
 
 
@@ -169,6 +169,9 @@ Lemon                   Expires 5 September 2022                [Page 3]
 
 Internet-Draft           DNS-SD SRP Replication               March 2022
 
+
+   *  The local resolver must be able to provide local browsing domain
+      advertisements (Section 11 of [RFC6763]).
 
 1.1.2.  Multicast DNS Advertising Proxy
 
@@ -213,11 +216,8 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
    SRP Replication has several benefits:
 
-   *  As long as one SRP replication partner remains online at all
-      times, SRP state is maintained when individual SRP replication
-      partners go offline
 
-   *  Name collisions when SRP clients change servers are avoided
+
 
 
 
@@ -225,6 +225,12 @@ Lemon                   Expires 5 September 2022                [Page 4]
 
 Internet-Draft           DNS-SD SRP Replication               March 2022
 
+
+   *  As long as one SRP replication partner remains online at all
+      times, SRP state is maintained when individual SRP replication
+      partners go offline
+
+   *  Name collisions when SRP clients change servers are avoided
 
    *  SRP service on a stub network can appear as an anycast service, so
       that SRP clients do not see an apparent change in servers and re-
@@ -269,18 +275,16 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    specific setting determines which of these domains will be used, and
    refer to whichever domain that is as DOMAIN.
 
-   For zone names based on the network name, the network type should be
-   used as a differentiator, in case there are two different local
-   network types with the same name.  So, for example, 'WiFi.DOMAIN.'
-
-
-
 
 
 Lemon                   Expires 5 September 2022                [Page 5]
 
 Internet-Draft           DNS-SD SRP Replication               March 2022
 
+
+   For zone names based on the network name, the network type should be
+   used as a differentiator, in case there are two different local
+   network types with the same name.  So, for example, 'WiFi.DOMAIN.'
 
 2.1.1.1.  Zone name based on WiFi SSID
 
@@ -326,10 +330,6 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    convenient place to put this information.  To advertise a zone name
    based on DNS-SD discovery, the SRP replication partner should add two
    fields to the TXT record of the service instance.  The first field is
-   the domain field: 'domain=name'.  This indicates a proposed SRP
-   replication zone name.  The second is the join field.  If 'join=yes'
-   then other SRP replication servers are encouraged to use the domain
-   name that appears in the domain field rather than creating a new
 
 
 
@@ -338,13 +338,16 @@ Lemon                   Expires 5 September 2022                [Page 6]
 Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
+   the domain field: 'domain=name'.  This indicates a proposed SRP
+   replication zone name.  The second is the join field.  If 'join=yes'
+   then other SRP replication servers are encouraged to use the domain
+   name that appears in the domain field rather than creating a new
    domain.
 
 2.2.  Advertising one's own replication service
 
-   An SRP replication service advertises its replication service after
-   it is finishes the partner discovery phase as specified in
-   Section 2.4.
+   An SRP replication service operating in the "routine operation" state
+   (Section 2.10) advertises its replication service.
 
    SRP replication service is advertised using DNS-SD [RFC6763].  The
    service name is '_srpl-tls._tcp'.  Each SRP replication partner
@@ -364,26 +367,23 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
    The TXT record for SRP replication advertises the following fields:
 
-   did  dataset ID as a 64-bit number encoded as hexadecimal ASCII.  The
-      dataset ID is used by SRP servers to establish a common SRP
-      dataset for a domain as described in Section 2.6.
+   did  a 64-bit number encoded as hexadecimal ASCII.  The dataset ID
+      used by SRP servers to establish a common SRP dataset for a domain
+      as described in Section 2.4.2.
 
    join  'yes' or 'no'.  Indicates whether other SRP replication servers
       are invited to join in replicating the dataset.
 
-   pid  partner ID as a 64-bit number encoded as hexadecimal ASCII as
-      described in Section 2.5.
+   pid  a 64-bit number encoded as hexadecimal ASCII.  The partner ID to
+      uniquely identify a SRP partner, as described in Section 2.6.
 
    dn  the domain name that this dataset is intended to represent
 
-   So in our example the TXT record might look like this:
+   So in our example, the TXT record might look like this:
 
    \031dn=openthread.thread.home.arpa.\020did=eb5bb51919a15cec\020pid=2c
    de2bed200126af\008join=yes
 
-   (Note that each name/value pair in the TXT record is length-encoded,
-   so the '\031`, the two '\020', and the '\008' are the lengths of the
-   name/value pairs.)
 
 
 
@@ -393,6 +393,10 @@ Lemon                   Expires 5 September 2022                [Page 7]
 
 Internet-Draft           DNS-SD SRP Replication               March 2022
 
+
+   (Note that each name/value pair in the TXT record is length-encoded,
+   so the '\031`, the two '\020', and the '\008' are the lengths of the
+   name/value pairs.)
 
 2.3.  Discovering other replication services
 
@@ -417,28 +421,24 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    added service instance: if they are not the same, then this instance
    is not a candidate for connection, and should be ignored.
 
-2.4.  Partner discovery phase
+2.4.  Startup
 
-   When a partner starts SRP Replication, it enters discovery phase.  It
-   picks a random discovery time interval uniformly selected from range
-   MIN_PARNTER_DISCOVERY_INTERVAL up to MAX_PARTNER_DISCOVERY_INTERVAL.
-   The recommended minimum and maximum value is 4 and 7.5 seconds.
+   When a partner starts SRP Replication, it enters the "startup" state
+   and picks a random discovery time interval uniformly selected from
+   the range [MIN_PARNTER_DISCOVERY_INTERVAL,
+   MAX_PARTNER_DISCOVERY_INTERVAL].  The recommended minimum and maximum
+   values are 4 and 7.5 seconds, respectively.
 
-   The partner spends the selected interval to discover partners to sync
-   and domain name if it does not have one.  It can itself start
-   advertising replication service and start acting as an SRP server
-   only after this discover time is passed and it either successfully
-   synchronized or attempted to synchronize and failed for at least
-   NUM_DISCOVERY_SYNC_ATTAMPETS times with each partner it discovered
-   during the discovery interval.
+   When the discovery time interval expires, the SRPL partner
+   transitions to the "routine operation" state (Section 2.10) after it
+   has either successfully synchronized with or
+   NUM_DISCOVERY_SYNC_ATTEMPTS have occurred with each discovered
+   partner.  If the partner did not discover any other SRPL partners to
+   synchronize with, it immediately transitions to the "routine
+   operation" state.
 
-   If no other partner is discovered by end of the interval, the SRP
-   partner determines that it is the only or the first partner.  It then
-   generates the Dataset ID using the process described in Section 2.6.
-   If the SRP partner does not have a domain name then it MUST also
-   select a zone name using one of the methods mentioned previously in
-   Section 2.1.  It can then start advertising the replication service
-   as mentioned in Section 2.2.
+
+
 
 
 
@@ -450,53 +450,53 @@ Lemon                   Expires 5 September 2022                [Page 8]
 Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
-   If the SRP partner does not have a domain to advertise and is
-   therefore willing to join an existing domain, when it discovers a
-   partner it checks to see if the TXT record for the service indicates
-   that joining is permitted.  If so, the SRP partner adopts the
-   provided domain name.
+2.4.1.  Determining an SRP zone name
 
-2.5.  Partner ID
+   An SRPL partner attempts to synchronize with other partners
+   advertising the same domain.  If the SRPL partner is not configured
+   with a domain name, and is therefore willing to join an existing
+   domain, it adopts the first domain name with joining enabled it
+   discovers.  During the remainder of the discovery time interval, the
+   SRPL partner attempts to synchronize with other partners advertising
+   the same domain name.  When the SRPL partner transitions to the
+   "routine operation" state, it will advertise the adopted domain name
+   and sets the 'join=yes' key/value pair in the TXT record.
 
-   The partner ID is a 64-bit number associated with an SRP replication
-   partner.  Upon staring SRP replication operation, the partner
-   generates a random ID using a high-quality random number generator
-   [RFC4086].  The partner ID does not need to be persisted over SRP
-   replication restarts.  If partner restarts SRP replication operation
-   it MUST select a new random ID.
+   When the discovery time interval expires, if the SRPL partner is not
+   configured with a domain name and was not able to adopt a domain
+   name, it MUST select a zone name using one of the methods mentioned
+   previously in Section 2.1.
 
-   With ID being randomly generated 64-bit number, the likelihood of ID
-   conflict is small.  However, if an SRP partner discovers another
-   partner using the same ID, the partner restarts SRP replication
-   operation which trigger it to pick a new random ID.
+2.4.2.  Determining a Dataset ID
 
-2.6.  Dataset ID
+   The dataset ID is a 64-bit number that identifies the set of data
+   replicated by a set of cooperating SRPL partners.  Ideally, there
+   should be exactly one dataset ID per domain.  However, it is possible
+   for several independent sets of SRPL partners to replicate a
+   particular domain, for example when some SRPL partners are unable to
+   discover each other.  When the SRPL partners are able to discover
+   each other again, the sets of partners must converge on a single
+   dataset using the dataset ID.
 
-   The dataset ID is a 64-bit number, generated by the first partner to
-   offer that dataset.  There should always be exactly one dataset ID
-   per domain, but the dataset ID has a separate purpose: it represents
-   the set of data that is being replicated by a set of cooperating SRP
-   replication partners.  This data is then offered under the agreed-
-   upon domain, but it's possible that there might be several sets of
-   SRP replication partners that agree to replicate a particular domain,
-   and then some event occurs which renders these partners visible to
-   each other.  When this happens, the independent sets of partners must
-   converge on a single dataset.  This is done using the dataset ID.
+   If an SRPL partner does not discover any other partners advertising
+   the same domain in the "startup" state Section 2.4, it generates a
+   new dataset ID when entering the "routine operation" state.  SRPL
+   partners MUST persist the highest (most significant byte or MSB) of
+   the dataset ID in non-volatile memory.  When generating a new dataset
+   ID, the partner MUST increment the MSB of last used dataset ID to use
+   as MSB of new dataset ID and populate the lower 56 bits randomly
+   using a high-quality random number generator [RFC4086].  If there is
+   no previously saved ID, then the partner randomly generates the
+   entire 64-bit ID.
 
-   When more than one dataset ID is present for a particular domain, the
-   mechanism below is used to select an ID as the preferred ID.  The SRP
-   replication partners that are currently replicating a dataset with a
-   non-preferred dataset ID will have to abandon that dataset and join
-   together in replicating the preferred dataset.
-
-
-
-
-
-
-
-
-
+   When multiple dataset IDs exist for a given domain, the largest
+   dataset ID is the preferred dataset ID.  Implementations MUST follow
+   the Serial Number Arithmetic as defined in [RFC1982] when comparing
+   two dataset IDs.  When using Serial Number Arithmetic with three or
+   more IDs, it is possible that the largest value may not be well-
+   defined (it is possible to have three IDs each being "larger" than
+   another one).  In this case, the dataset ID that is largest using
+   absolute value comparison is the preferred dataset ID.
 
 
 
@@ -506,28 +506,13 @@ Lemon                   Expires 5 September 2022                [Page 9]
 Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
-   If there are two dataset IDs, the one that is numerically larger in
-   the sense as defined in serial number arithmetic [RFC1982] is
-   preferred.  If there are multiple IDs, again the ID that is
-   numerically largest is preferred.  However, using the serial number
-   comparison with three or more IDs, it is possible though unlikely
-   that the largest value may not be well-defined.  For example, it is
-   possible to have three IDs each being larger (in serial number sense)
-   than another one.  In such a situation where the largest in serial
-   number sense is not well-defined, the ID that is largest in the
-   normal numerical comparison sense is preferred.
+   If at any time (regardless of "startup" or "routine operation" state)
+   an SRPL partner discovers that it is synchronizing with a non-
+   preferred dataset ID, it MUST abandon that dataset, re-enter the
+   "startup" state, and attempt to synchronize with the (newly
+   discovered) preferred dataset id.
 
-   If an SRP partner determines that it is the first partner to offer
-   the dataset, it generates the dataset ID.  SRP partners MUST persist
-   the last used dataset ID or the highest (most significant byte or
-   MSB) of the ID associated with same domain in non-volatile memory.
-   When generated a new dataset ID, partner increment the MSB of last
-   used ID to use as MSB of new ID and populates the lower 56-bit
-   randomly using a high-quality random number generator [RFC4086].  If
-   there is no previously saved ID, then the entire 64-bit ID is
-   generated randomly.
-
-2.7.  Discovering the addresses of partners
+2.5.  Discovering the addresses of partners
 
    When a partner is discovered, two new ongoing mDNS queries are
    started on the hostname indicated in the SRV record of the partner:
@@ -536,7 +521,20 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    the partner adds the address to the list of addresses belonging to
    that partner.
 
-2.8.  Establishing Communication with a replication partner
+2.6.  Partner ID
+
+   The partner ID is a 64-bit number associated with an SRPL partner.
+   Upon entering the "startup" state, the partner MUST generate a random
+   ID using a high-quality random number generator [RFC4086].  If a
+   partner restarts SRP replication operation it MUST select a new
+   random ID.
+
+   The likelihood of partner ID conflict is small.  However, if an SRPL
+   partner discovers another partner using the same ID, the partner MUST
+   restart SRP replication operation, which triggers it to pick a new
+   random ID.
+
+2.7.  Establishing Communication with a replication partner
 
    When an address is added to a partner's address list, the partner
    first checks to see if the address is one of its own addresses.  If
@@ -544,16 +542,18 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    to it.  This is somewhat safer than comparing hostnames, since a
    hostname collision can result in renaming.
 
-   If the partner is not marked 'me', then the partner checks to see if
+   If the partner is not marked "me", then the partner checks to see if
    it has an existing connection to that partner.  If it does not, then
    it checks to see whether it has disabled outgoing connections to that
    partner.  If not, then it determines whether it should initiate a
    connection on the new address.
 
-   While a partner is in discovery phase as described in Section 2.4 it
-   initiates connection with the other discovered partners.  While in
-   this phase the partner does not yet advertise SRP replication service
-   so other partners cannot discover it over DNS-SD.  If the partner is
+   While a partner is in the "startup" state (Section 2.4) it initiates
+   connections with the other discovered partners.  In the "startup"
+   state, the partner does not advertise its SRP replication service so
+   other partners cannot discover it over DNS-SD.
+
+
 
 
 
@@ -562,10 +562,12 @@ Lemon                   Expires 5 September 2022               [Page 10]
 Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
-   not in discover phase then partner IDs are used to determine which
-   partner should initiate the connection.  The partner with numerically
-   larger ID in the sense as defined in serial number arithmetic
-   [RFC1982] initiates connection with the one with smaller ID.
+   If the partner is in the "routine operation" state, it uses the
+   partner ID to determine which partner should initiate the connection.
+   If the partner determines that its own partner ID is larger, it MUST
+   initiate the connection.  Otherwise, the partner MUST NOT initiate
+   the connection.  Implementations MUST follow the Serial Number
+   Arithmetic as defined in [RFC1982] when comparing two partner IDs.
 
    When a connection fails and if there are multiple addresses
    associated with partner, the connecting partner advances to the next
@@ -582,33 +584,31 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    the matching partner, and the protocol is started at the point of
    receiving an incoming connection.
 
-2.9.  Incoming connections
+2.8.  Incoming connections
 
    When an incoming connection is received, it is checked against the
    partner list based on the source address of the incoming connection.
    If the address appears on the list of addresses for a partner, then
    the connection is attributed to that partner.  If there is already an
-   existing connection with the same partner, the existing connection
-   will be marked as stable and can closed.
+   existing connection attributed to the same partner, the partner
+   processing the incoming connection MUST immediately close the
+   existing connection.
 
-2.10.  Initial synchronization
+2.9.  Initial synchronization
 
-   The connecting partner begins the session by sending a session
-   message which includes its partner ID and also indicating whether or
-   not it is a "new partner" and still in discovery phase.  The
-   receiving partner waits to receive such a message.  If the message
-   indicates that the connecting partner is a "new partner", the
-   connection is accepted.  Otherwise, the receiving partner checks the
-   partner IDs as described in Section 2.8 to validate that the its
-   partner ID is numerically smaller (in the sense as defined in serial
-   number arithmetic [RFC1982]) than the connecting partner's ID.  If
-   the connection survives the comparison, then the partner sends a
-   response to the session message and waits for the connecting partner
-   to request a list of update candidates.
+   The connecting partner begins the session by sending an SRPL Session
+   message, which includes its partner ID and indicates whether or not
+   it is in the "startup" state.  The receiving partner waits to receive
+   the SRPL Session message.  If the message indicates that the
+   connecting partner is in the "startup" state, the receiving partner
+   accepts the connection.  Otherwise, the receiving partner compares
+   the partner IDs as described in Section 2.7 and accepts the
+   connection if its partner ID is smaller than the connecting partner's
+   ID.  If the receiving partner accepts the connection, it MUST send a
+   response to the SRPL Session message and waits for the connecting
+   partner to request a list of update candidates.
 
-   The connecting partner waits for a response to the initial session
-   message, and when it is received, requests that the server send
-   candidates.
+
 
 
 
@@ -618,7 +618,11 @@ Lemon                   Expires 5 September 2022               [Page 11]
 Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
-2.10.1.  Sending candidates
+   The connecting partner waits for a response to the SRPL Session
+   message, and when it is received, requests that the server send
+   candidates.
+
+2.9.1.  Sending candidates
 
    When a partner receives a "send candidates" message that it is
    expecting to receive, it generates a candidate list from the list of
@@ -661,10 +665,6 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    When a partner is finished iterating across its list of candidates,
    it sends a "send candidates" response.
 
-   When a partner receives a "send candidates" response, if it is the
-   server, it sends its own "send candidates" message, and processes any
-   proposed candidates.
-
 
 
 
@@ -674,12 +674,16 @@ Lemon                   Expires 5 September 2022               [Page 12]
 Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
+   When a partner receives a "send candidates" response, if it is the
+   server, it sends its own "send candidates" message, and processes any
+   proposed candidates.
+
    When a partner that is a server receives a "send candidates"
    response, it goes into the "routine operation" state.  When a partner
    that is a client sends its "send candidates" response, it goes into
    the "routine operation" state.
 
-2.11.  Routine Operation
+2.10.  Routine Operation
 
    During routine operation, whenever an update is successfully
    processed from an SRP client, the partner that received that update
@@ -714,11 +718,7 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    protocol.  DNS Push session management includes session establishment
    as well as session maintenance.
 
-3.1.1.  DSO Session Establishment
 
-   An DSO session for an SRPL connection can be established either by
-   simply sending the first SRPL message, or by sending a DSO Keepalive
-   message.  Section 5.1 of [RFC8490].
 
 
 
@@ -729,6 +729,12 @@ Lemon                   Expires 5 September 2022               [Page 13]
 
 Internet-Draft           DNS-SD SRP Replication               March 2022
 
+
+3.1.1.  DSO Session Establishment
+
+   An DSO session for an SRPL connection can be established either by
+   simply sending the first SRPL message, or by sending a DSO Keepalive
+   message.  Section 5.1 of [RFC8490].
 
 3.1.2.  DSO Session maintenance
 
@@ -744,39 +750,33 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 3.2.  SRPL Messages
 
-   SRPL uses DSO message format where a message begins with a primary
-   TLV and can contain secondary TLVs with additional information
+   SRPL uses the DSO message format.  Each message begins with a Primary
+   TLV and may contain secondary TLVs with additional information
    (Section 5.4 of [RFC8490]).  SRPL uses DSO request and response
-   message types.  The recipient of a request is expected to send a
-   response message with same primary TLV.  SRPL does not define or use
+   message types.  A partner receiving a DSO request is expected to send
+   a DSO response with same Primary TLV.  SRPL does not define or use
    any unidirectional DSO message.
 
    To ensure future compatibility, when processing a received SRPL
-   message, any unrecognized secondary TLV or additional TLV value in
-   the currently defined SRPL TLVs MUST be silently ignored, and the
-   remainder of the message is interpreted and handled as if the
-   unrecognized parts were not present (Section 5.4.5 of [RFC8490]).
-   However, if an received SRPL message does not follow the required
-   format and policies specified below (for example, it does not include
-   a required secondary TLV or it is received at incorrect time or sent
-   by incorrect partner) it MUST be treated as a "fatal error" and the
-   connection MUST be forcibly aborted immediately as in Section 5.3.1
+   message, any unrecognized secondary TLVs or additional value in
+   currently defined SRPL TLVs MUST be silently ignored, and the message
+   is interpreted and handled as if the unrecognized parts were not
+   present (Section 5.4.5 of [RFC8490]).  However, if a partner receives
+   an SRPL message that does not satisfy the message format and
+   processing rules specified below, it MUST treat this as a "fatal
+   error" and forcibly abort the connection immediately (Section 5.3.1
    of [RFC8490]).
 
-   The SRPL messages and their corresponding primary TLVs used in the
-   SRPL protocol are as follows:
+   The SRPL messages and their corresponding Primary TLVs are as
+   follows:
 
 3.2.1.  SRPL Session
 
    DSO-TYPE code: SRPLSession.  Introduces the SRPL session.  The SRPL
-   session TLV contains the partner ID as an unsigned 64-bit value.
-   SRPL Session requests can optionally include SRPL New Partner TLV as
-   a secondary TLV.  The inclusion of the SRPL New Partner TLV indicates
-   whether the partner is a new partner and still in its discovery
-   phase.  SRPL Session request MUST only be sent by the partner acting
-   as a client.
-
-
+   session TLV contains the partner ID as an unsigned 64-bit value.  A
+   SRPL Session request may include an SRPL New Partner secondary TLV.
+   Inclusion of the SRPL New Partner TLV indicates whether the partner
+   is in the "startup" state.
 
 
 
@@ -790,14 +790,14 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
    The SRPL Session request is sent by a partner acting as a client to
    its remote partner once the TLS connection to the partner, acting as
-   a server, has succeeded.  The SRPL session message establishes the
+   a server, has succeeded.  The SRPL Session request establishes the
    DSO connection as an SRPL protocol connection.  If it is the first
    DSO message sent by the partner acting as a client, then it also
    establishes the DSO session.
 
    When the SRPL partner acting as a client receives a response to its
-   SRPL session message from server, it sends an SRPL Send Candidates
-   request message.
+   SRPL Session message from server, it MUST send an SRPL Send
+   Candidates request.
 
 3.2.1.2.  SRPL server behavior
 
@@ -806,15 +806,18 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    already established.  If so, this is a protocol error, and the SRPL
    partner MUST drop the connection.
 
-   When the server receives an SRPL Session request, it checks the
-   presence of SRPL New Partner secondary TLV.  If this secondary TLV is
-   included in the Session request, then sever sends a Session response.
-   If the SRPL New partner is not present, then the server checks the
-   partner IDs and validates that the its partner ID is numerically
-   smaller (in the sense as defined in serial number arithmetic
-   [RFC1982]) than the client's partner ID from the Session TLV in the
-   request.  If the connection survives the ID comparison, then its
-   sends a Session response.
+   If the SRPL Session request is establishing a new session, the server
+   MUST send a SRPL Session response if either of the following
+   conditions are satisfied:
+
+   *  The SRPL Session request contains an SRPL New Partner secondary
+      TLV.
+
+   *  The SRPL Session request contains a partner ID that is larger than
+      the server's (see Section 2.7).
+
+   If none of these conditions are satisfied, this is a protocol error,
+   and the SRPL partner MUST drop the connection.
 
 3.2.2.  SRPL Send Candidates
 
@@ -829,11 +832,8 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    request after it has received an SRPL Session response.  It MUST NOT
    send this request at any other time.
 
-   An SRPL partner acting as a client expects to receive an SRPL Send
-   Candidates message after it has received an SRPL Send Candidates
-   response.  If it receives an SRPL Send Candidates message at any
-   other time, this is a protocol error, and the SRPL partner should
-   drop its connection to the server.
+
+
 
 
 
@@ -841,6 +841,12 @@ Lemon                   Expires 5 September 2022               [Page 15]
 
 Internet-Draft           DNS-SD SRP Replication               March 2022
 
+
+   An SRPL partner acting as a client expects to receive an SRPL Send
+   Candidates message after it has received an SRPL Send Candidates
+   response.  If it receives an SRPL Send Candidates message at any
+   other time, this is a protocol error, and the SRPL partner should
+   drop its connection to the server.
 
 3.2.2.2.  SRPL server behavior
 
@@ -869,9 +875,6 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
    The SRPL Candidate response MUST include exactly one of the following
    status TLVs: SRPL Candidate Yes, SRPL Candidate No, or SRPL Conflict.
-   If an SRPL partner receives an SRPL Candidate response which does not
-   contain exactly one of these TLVS, this is a protocol error, and the
-   partner MUST drop the connection.
 
 3.2.3.2.  SRPL partner common behavior
 
@@ -887,9 +890,6 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    not yet responded to an outstanding SRPL Candidate request or SRPL
    Host request MUST treat this as a protocol failure and drop the
    connection.
-
-
-
 
 
 
@@ -940,10 +940,10 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    host; in this case, the SRPL Host request MUST include all of the
    previously received SRP updates that would be required to reconstruct
    the current state of the host registration on the server sending the
-   SRPL Host request.  The SRPL Host Message TLVs MUST be included in
-   order based on the time offset they were received and processed on
-   the SRP server starting with the earliest message and ending with
-   most recent one.
+   SRPL Host request.  SRPL Host Message TLVs MUST be ordered starting
+   with the largest time offset and ending with the smallest time
+   offset.
+
 
 
 
@@ -1012,9 +1012,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 3.3.1.  SRPL Candidate Yes
 
-   DSO-TYPE code: SRPLCandidateYes.  It contains no value, just the type
-   length.  In an SRPL Candidate response, indicates to the partner that
-   an SRPL Host message for the candidate is wanted and should be sent.
+   DSO-TYPE code: SRPLCandidateYes.  It contains no value.  In an SRPL
+   Candidate response, indicates to the partner that an SRPL Host
+   message for the candidate is wanted and should be sent.
 
    Appears as a secondary TLV in SRPL Candidate responses.  MUST NOT
    appear in any other SRPL request or response.  MUST NOT appear in
@@ -1022,10 +1022,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 3.3.2.  SRPL Candidate No
 
-   DSO-TYPE code: SRPLCandidateNo.  It contains no value, just the type
-   length.  In an SRPL Candidate response, indicates to the partner that
-   an SRPL Host message for the candidate is not wanted and should not
-   be sent.
+   DSO-TYPE code: SRPLCandidateNo.  It contains no value.  In an SRPL
+   Candidate response, indicates to the partner that an SRPL Host
+   message for the candidate is not wanted and should not be sent.
 
    Appears as a secondary TLV in SRPL Candidate responses.  MUST NOT
    appear in any other SRPL request or response.  MUST NOT appear in
@@ -1034,11 +1033,11 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 3.3.3.  SRPL Conflict
 
-   DSO-TYPE code: SRPLConflict.  It contains no value, just the type
-   length.  In an SRPL Candidate response, indicates to the partner that
-   an SRPL Host message for the candidate is not wanted and should not
-   be sent.  Additionally indicates that the proposed host conflicts
-   with local data.  This indication is informative and has no effect on
+   DSO-TYPE code: SRPLConflict.  It contains no value.  In an SRPL
+   Candidate response, indicates to the partner that an SRPL Host
+   message for the candidate is not wanted and should not be sent.
+   Additionally indicates that the proposed host conflicts with local
+   data.  This indication is informative and has no effect on
    processing.
 
    Appears as a secondary TLV in SRPL Candidate responses.  MUST NOT
@@ -1055,6 +1054,7 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
    Required as a secondary TLV in SRPL Candidate and SRPL Host requests.
    MUST NOT appear in any other SRPL request or response.
+
 
 
 
@@ -1103,7 +1103,7 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    DSO-TYPE code: SRPLTimeOffset.  In an SRPL Candidate request, conveys
    the difference between the time the SRP update was received from the
    SRP client and the current time on the partner generating the
-   request, in seconds.  The time offset value is represented as
+   request, in seconds.  The time offset value is represented as an
    unsigned 32-bit value
 
    Required as a secondary TLV in SRPL Candidate requests.  MUST NOT
@@ -1113,7 +1113,7 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
    DSO-TYPE code: SRPLKeyID.  In an SRPL Candidate request, conveys the
    key ID of the SRP client.  The value is an unsigned 32-bit number and
-   calculated as described in Section 2.10.1.
+   calculated as described in Section 2.9.1.
 
 
 
@@ -1127,9 +1127,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 3.3.8.  SRPL New Partner
 
-   DSO-TYPE code: SRPLNewPartnter.  It contains no value, just the type
-   length.  If included in an SRPL Session request, it indicates that
-   the partner is new and still in its discovery phase.
+   DSO-TYPE code: SRPLNewPartnter.  It contains no value.  When included
+   in an SRPL Session request, indicates that the partner is in the
+   "startup" state.
 
    Can be optionally included as a secondary TLV in SRPL Session
    requests.  MUST NOT appear in any other SRPL request or response.
@@ -1265,6 +1265,15 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
               Domain ("arpa")", BCP 52, RFC 3172, DOI 10.17487/RFC3172,
               September 2001, <https://www.rfc-editor.org/info/rfc3172>.
 
+   [RFC4086]  Eastlake 3rd, D., Schiller, J., and S. Crocker,
+              "Randomness Requirements for Security", BCP 106, RFC 4086,
+              DOI 10.17487/RFC4086, June 2005,
+              <https://www.rfc-editor.org/info/rfc4086>.
+
+   [RFC6763]  Cheshire, S. and M. Krochmal, "DNS-Based Service
+              Discovery", RFC 6763, DOI 10.17487/RFC6763, February 2013,
+              <https://www.rfc-editor.org/info/rfc6763>.
+
    [RFC7858]  Hu, Z., Zhu, L., Heidemann, J., Mankin, A., Wessels, D.,
               and P. Hoffman, "Specification for DNS over Transport
               Layer Security (TLS)", RFC 7858, DOI 10.17487/RFC7858, May
@@ -1274,6 +1283,13 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
               'home.arpa.'", RFC 8375, DOI 10.17487/RFC8375, May 2018,
               <https://www.rfc-editor.org/info/rfc8375>.
 
+
+
+Lemon                   Expires 5 September 2022               [Page 23]
+
+Internet-Draft           DNS-SD SRP Replication               March 2022
+
+
    [RFC8490]  Bellis, R., Cheshire, S., Dickinson, J., Dickinson, S.,
               Lemon, T., and T. Pusateri, "DNS Stateful Operations",
               RFC 8490, DOI 10.17487/RFC8490, March 2019,
@@ -1282,13 +1298,6 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
    [SUDN]     "Special-Use Domain Names Registry", July 2012,
               <https://www.iana.org/assignments/special-use-domain-
               names/special-use-domain-names.xhtml>.
-
-
-
-Lemon                   Expires 5 September 2022               [Page 23]
-
-Internet-Draft           DNS-SD SRP Replication               March 2022
-
 
    [LSDZ]     "Locally-Served DNS Zones Registry", July 2011,
               <https://www.iana.org/assignments/locally-served-dns-
@@ -1302,15 +1311,6 @@ Author's Address
    Cupertino, California 95014
    United States of America
    Email: mellon@fugue.com
-
-
-
-
-
-
-
-
-
 
 
 
