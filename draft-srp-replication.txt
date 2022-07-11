@@ -4,8 +4,10 @@
 
 Internet Engineering Task Force                                 T. Lemon
 Internet-Draft                                                Apple Inc.
-Intended status: Standards Track                            4 March 2022
-Expires: 5 September 2022
+Intended status: Standards Track                         A. Keshavarzian
+Expires: 12 January 2023                                          J. Hui
+                                                                  Google
+                                                            11 July 2022
 
 
   Automatic Replication of DNS-SD Service Registration Protocol Zones
@@ -33,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 September 2022.
+   This Internet-Draft will expire on 12 January 2023.
 
 Copyright Notice
 
@@ -51,11 +53,9 @@ Copyright Notice
 
 
 
-
-
-Lemon                   Expires 5 September 2022                [Page 1]
+Lemon, et al.            Expires 12 January 2023                [Page 1]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 Table of Contents
@@ -109,16 +109,16 @@ Table of Contents
 
 
 
-Lemon                   Expires 5 September 2022                [Page 2]
+Lemon, et al.            Expires 12 January 2023                [Page 2]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
      6.3.  Registration and Delegation of 'local.arpa' as a
            Special-Use Domain Name . . . . . . . . . . . . . . . . .  23
    7.  Informative References  . . . . . . . . . . . . . . . . . . .  23
    8.  Normative References  . . . . . . . . . . . . . . . . . . . .  23
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  24
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
 
 1.  Introduction
 
@@ -165,9 +165,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022                [Page 3]
+Lemon, et al.            Expires 12 January 2023                [Page 3]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
    *  The local resolver must be able to provide local browsing domain
@@ -221,9 +221,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022                [Page 4]
+Lemon, et al.            Expires 12 January 2023                [Page 4]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
    *  As long as one SRP replication partner remains online at all
@@ -277,9 +277,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022                [Page 5]
+Lemon, et al.            Expires 12 January 2023                [Page 5]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
    For zone names based on the network name, the network type should be
@@ -333,9 +333,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022                [Page 6]
+Lemon, et al.            Expires 12 January 2023                [Page 6]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
    the domain field: 'domain=name'.  This indicates a proposed SRP
@@ -389,9 +389,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022                [Page 7]
+Lemon, et al.            Expires 12 January 2023                [Page 7]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
    (Note that each name/value pair in the TXT record is length-encoded,
@@ -445,9 +445,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022                [Page 8]
+Lemon, et al.            Expires 12 January 2023                [Page 8]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 2.4.1.  Determining an SRP zone name
@@ -501,9 +501,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022                [Page 9]
+Lemon, et al.            Expires 12 January 2023                [Page 9]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
    If at any time (regardless of "startup" or "routine operation" state)
@@ -557,9 +557,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 10]
+Lemon, et al.            Expires 12 January 2023               [Page 10]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
    If the partner is in the "routine operation" state, it uses the
@@ -613,9 +613,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 11]
+Lemon, et al.            Expires 12 January 2023               [Page 11]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
    The connecting partner waits for a response to the SRPL Session
@@ -669,9 +669,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 12]
+Lemon, et al.            Expires 12 January 2023               [Page 12]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
    When a partner receives a "send candidates" response, if it is the
@@ -725,9 +725,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 13]
+Lemon, et al.            Expires 12 January 2023               [Page 13]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 3.1.1.  DSO Session Establishment
@@ -781,9 +781,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 14]
+Lemon, et al.            Expires 12 January 2023               [Page 14]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 3.2.1.1.  SRPL client behavior
@@ -837,9 +837,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 15]
+Lemon, et al.            Expires 12 January 2023               [Page 15]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
    An SRPL partner acting as a client expects to receive an SRPL Send
@@ -893,9 +893,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 16]
+Lemon, et al.            Expires 12 January 2023               [Page 16]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
    When a partner receives a valid SRPL Candidate message, it checks its
@@ -949,9 +949,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 17]
+Lemon, et al.            Expires 12 January 2023               [Page 17]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 3.2.4.2.  SRPL partner common behavior during synchronization
@@ -1005,9 +1005,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 18]
+Lemon, et al.            Expires 12 January 2023               [Page 18]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 3.3.1.  SRPL Candidate Yes
@@ -1061,9 +1061,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 19]
+Lemon, et al.            Expires 12 January 2023               [Page 19]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 3.3.5.  SRPL Host Message
@@ -1117,9 +1117,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 20]
+Lemon, et al.            Expires 12 January 2023               [Page 20]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
    Required as a secondary TLV in SRPL Candidate requests.  MUST NOT
@@ -1173,9 +1173,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 21]
+Lemon, et al.            Expires 12 January 2023               [Page 21]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 6.2.  DSO TLV type code
@@ -1229,9 +1229,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 22]
+Lemon, et al.            Expires 12 January 2023               [Page 22]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 6.3.  Registration and Delegation of 'local.arpa' as a Special-Use
@@ -1285,9 +1285,9 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
 
 
 
-Lemon                   Expires 5 September 2022               [Page 23]
+Lemon, et al.            Expires 12 January 2023               [Page 23]
 
-Internet-Draft           DNS-SD SRP Replication               March 2022
+Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
    [RFC8490]  Bellis, R., Cheshire, S., Dickinson, J., Dickinson, S.,
@@ -1303,7 +1303,7 @@ Internet-Draft           DNS-SD SRP Replication               March 2022
               <https://www.iana.org/assignments/locally-served-dns-
               zones/locally-served-dns-zones.xhtml>.
 
-Author's Address
+Authors' Addresses
 
    Ted Lemon
    Apple Inc.
@@ -1313,6 +1313,20 @@ Author's Address
    Email: mellon@fugue.com
 
 
+   Abtin Keshavarzian
+   Google
+   1600 Amphitheatre Parkway CA 94043
+   Mountain View, California 94043
+   United States of America
+   Email: abtink@google.com
+
+
+   Jonathan Hui
+   Google
+   1600 Amphitheatre Parkway CA 94043
+   Mountain View, California 94043
+   United States of America
+   Email: jonhui@google.com
 
 
 
@@ -1327,18 +1341,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Lemon                   Expires 5 September 2022               [Page 24]
+Lemon, et al.            Expires 12 January 2023               [Page 24]
