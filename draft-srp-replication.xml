@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
-<rfc category="std" submissionType="IETF" docName="draft-lemon-srp-replication-02" ipr="trust200902"
+<rfc category="std" submissionType="IETF" docName="draft-lemon-srp-replication-03" ipr="trust200902"
      xmlns:xi="http://www.w3.org/2001/XInclude" version="3"
      scripts="Common,Latin" sortRefs="false"
      symRefs="true" tocDepth="3" tocInclude="true" xml:lang="en">
@@ -48,7 +48,7 @@
       </address>
     </author>
 
-    <date year='2022' month='July' day='11'/>
+    <date year='2023' month='February' day='20'/>
     <area>Internet</area>
     <workgroup>Internet Engineering Task Force</workgroup>
 
@@ -418,7 +418,7 @@ uint32_t key_id(uint8_t *key_data, int key_len) {
           <t>DSO-TYPE code: SRPLHost. Provides the content of a particular SRP client registration. The SRPL Host TLV contains no value.</t>
           <section>
             <name>Required secondary TLVs</name>
-            <t>The SRPL Host request MUST include the following secondary TLVs: SRPL Hostname, SRPL Key ID, and one or more SRPL Host Message TLVs. If an SRPL partner receives an SRPL Candidate request that doesn't contain all of these secondary TLVs, this is a protocol error, and the partner MUST drop the connection.</t>
+            <t>The SRPL Host request MUST include as secondary TLVs one or more SRPL Host Message TLVs. If an SRPL partner receives an SRPL Candidate request that doesn't contain at least one SRPL Host Message TLV, this is a protocol error, and the partner MUST drop the connection.</t>
             <t>The SRPL Host request MUST always include at least one SRPL Host Message TLV, which contains the most recent update the SRP server has received for that host. However, in some cases an update for a host may update some, but not all, service instances that reference that host; in this case, the SRPL Host request MUST include all of the previously received SRP updates that would be required to reconstruct the current state of the host registration on the server sending the SRPL Host request. SRPL Host Message TLVs MUST be ordered starting with the largest time offset and ending with the smallest time offset.</t>
           </section>
           <section>
@@ -457,8 +457,8 @@ uint32_t key_id(uint8_t *key_data, int key_len) {
         </section>
         <section>
           <name>SRPL Hostname</name>
-          <t>DSO-TYPE code: SRPLHostname. In an SRPL Candidate or SRPL Host request, indicates to the partner the hostname of an SRP registration. The TLV value is the hostname represented in DNS wire format <xref target="RFC1035" section="3.1" sectionFormat="of"/>.</t>
-          <t>Required as a secondary TLV in SRPL Candidate and SRPL Host requests. MUST NOT appear in any other SRPL request or response.</t>
+          <t>DSO-TYPE code: SRPLHostname. In an SRPL Candidate request, indicates to the partner the hostname of an SRP registration. The TLV value is the hostname represented in DNS wire format <xref target="RFC1035" section="3.1" sectionFormat="of"/>.</t>
+          <t>Required as a secondary TLV in SRPL Candidate requests. MUST NOT appear in any other SRPL request or response.</t>
         </section>
         <section>
           <name>SRPL Host Message</name>
