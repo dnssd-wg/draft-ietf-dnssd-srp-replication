@@ -5,13 +5,13 @@
 Internet Engineering Task Force                                 T. Lemon
 Internet-Draft                                                Apple Inc.
 Intended status: Standards Track                         A. Keshavarzian
-Expires: 12 January 2023                                          J. Hui
+Expires: 24 August 2023                                           J. Hui
                                                                   Google
-                                                            11 July 2022
+                                                        20 February 2023
 
 
   Automatic Replication of DNS-SD Service Registration Protocol Zones
-                     draft-lemon-srp-replication-02
+                     draft-lemon-srp-replication-03
 
 Abstract
 
@@ -35,11 +35,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 January 2023.
+   This Internet-Draft will expire on 24 August 2023.
 
 Copyright Notice
 
-   Copyright (c) 2022 IETF Trust and the persons identified as the
+   Copyright (c) 2023 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Lemon, et al.            Expires 12 January 2023                [Page 1]
+Lemon, et al.            Expires 24 August 2023                 [Page 1]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 Table of Contents
@@ -96,7 +96,7 @@ Table of Contents
        3.3.2.  SRPL Candidate No . . . . . . . . . . . . . . . . . .  19
        3.3.3.  SRPL Conflict . . . . . . . . . . . . . . . . . . . .  19
        3.3.4.  SRPL Hostname . . . . . . . . . . . . . . . . . . . .  19
-       3.3.5.  SRPL Host Message . . . . . . . . . . . . . . . . . .  20
+       3.3.5.  SRPL Host Message . . . . . . . . . . . . . . . . . .  19
        3.3.6.  SRPL Time Offset  . . . . . . . . . . . . . . . . . .  20
        3.3.7.  SRPL Key ID . . . . . . . . . . . . . . . . . . . . .  20
        3.3.8.  SRPL New Partner  . . . . . . . . . . . . . . . . . .  21
@@ -104,18 +104,18 @@ Table of Contents
    5.  Delegation of 'local.arpa.' . . . . . . . . . . . . . . . . .  21
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  21
      6.1.  'srpl-tls' Service Name . . . . . . . . . . . . . . . . .  21
-     6.2.  DSO TLV type code . . . . . . . . . . . . . . . . . . . .  22
+     6.2.  DSO TLV type code . . . . . . . . . . . . . . . . . . . .  21
 
 
 
 
-Lemon, et al.            Expires 12 January 2023                [Page 2]
+Lemon, et al.            Expires 24 August 2023                 [Page 2]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
      6.3.  Registration and Delegation of 'local.arpa' as a
-           Special-Use Domain Name . . . . . . . . . . . . . . . . .  23
+           Special-Use Domain Name . . . . . . . . . . . . . . . . .  22
    7.  Informative References  . . . . . . . . . . . . . . . . . . .  23
    8.  Normative References  . . . . . . . . . . . . . . . . . . . .  23
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
@@ -165,9 +165,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023                [Page 3]
+Lemon, et al.            Expires 24 August 2023                 [Page 3]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
    *  The local resolver must be able to provide local browsing domain
@@ -221,9 +221,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023                [Page 4]
+Lemon, et al.            Expires 24 August 2023                 [Page 4]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
    *  As long as one SRP replication partner remains online at all
@@ -277,9 +277,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023                [Page 5]
+Lemon, et al.            Expires 24 August 2023                 [Page 5]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
    For zone names based on the network name, the network type should be
@@ -333,9 +333,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023                [Page 6]
+Lemon, et al.            Expires 24 August 2023                 [Page 6]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
    the domain field: 'domain=name'.  This indicates a proposed SRP
@@ -389,9 +389,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023                [Page 7]
+Lemon, et al.            Expires 24 August 2023                 [Page 7]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
    (Note that each name/value pair in the TXT record is length-encoded,
@@ -445,9 +445,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023                [Page 8]
+Lemon, et al.            Expires 24 August 2023                 [Page 8]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 2.4.1.  Determining an SRP zone name
@@ -501,9 +501,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023                [Page 9]
+Lemon, et al.            Expires 24 August 2023                 [Page 9]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
    If at any time (regardless of "startup" or "routine operation" state)
@@ -557,9 +557,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023               [Page 10]
+Lemon, et al.            Expires 24 August 2023                [Page 10]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
    If the partner is in the "routine operation" state, it uses the
@@ -613,9 +613,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023               [Page 11]
+Lemon, et al.            Expires 24 August 2023                [Page 11]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
    The connecting partner waits for a response to the SRPL Session
@@ -669,9 +669,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023               [Page 12]
+Lemon, et al.            Expires 24 August 2023                [Page 12]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
    When a partner receives a "send candidates" response, if it is the
@@ -725,9 +725,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023               [Page 13]
+Lemon, et al.            Expires 24 August 2023                [Page 13]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 3.1.1.  DSO Session Establishment
@@ -781,9 +781,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023               [Page 14]
+Lemon, et al.            Expires 24 August 2023                [Page 14]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 3.2.1.1.  SRPL client behavior
@@ -837,9 +837,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023               [Page 15]
+Lemon, et al.            Expires 24 August 2023                [Page 15]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
    An SRPL partner acting as a client expects to receive an SRPL Send
@@ -893,9 +893,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023               [Page 16]
+Lemon, et al.            Expires 24 August 2023                [Page 16]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
    When a partner receives a valid SRPL Candidate message, it checks its
@@ -927,11 +927,10 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 3.2.4.1.  Required secondary TLVs
 
-   The SRPL Host request MUST include the following secondary TLVs: SRPL
-   Hostname, SRPL Key ID, and one or more SRPL Host Message TLVs.  If an
-   SRPL partner receives an SRPL Candidate request that doesn't contain
-   all of these secondary TLVs, this is a protocol error, and the
-   partner MUST drop the connection.
+   The SRPL Host request MUST include as secondary TLVs one or more SRPL
+   Host Message TLVs.  If an SRPL partner receives an SRPL Candidate
+   request that doesn't contain at least one SRPL Host Message TLV, this
+   is a protocol error, and the partner MUST drop the connection.
 
    The SRPL Host request MUST always include at least one SRPL Host
    Message TLV, which contains the most recent update the SRP server has
@@ -949,9 +948,10 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023               [Page 17]
+
+Lemon, et al.            Expires 24 August 2023                [Page 17]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 3.2.4.2.  SRPL partner common behavior during synchronization
@@ -1005,9 +1005,9 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 
 
-Lemon, et al.            Expires 12 January 2023               [Page 18]
+Lemon, et al.            Expires 24 August 2023                [Page 18]
 
-Internet-Draft           DNS-SD SRP Replication                July 2022
+Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 3.3.1.  SRPL Candidate Yes
@@ -1047,29 +1047,24 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
 3.3.4.  SRPL Hostname
 
-   DSO-TYPE code: SRPLHostname.  In an SRPL Candidate or SRPL Host
-   request, indicates to the partner the hostname of an SRP
-   registration.  The TLV value is the hostname represented in DNS wire
-   format Section 3.1 of [RFC1035].
+   DSO-TYPE code: SRPLHostname.  In an SRPL Candidate request, indicates
+   to the partner the hostname of an SRP registration.  The TLV value is
+   the hostname represented in DNS wire format Section 3.1 of [RFC1035].
 
-   Required as a secondary TLV in SRPL Candidate and SRPL Host requests.
-   MUST NOT appear in any other SRPL request or response.
-
-
-
-
-
-
-
-Lemon, et al.            Expires 12 January 2023               [Page 19]
-
-Internet-Draft           DNS-SD SRP Replication                July 2022
-
+   Required as a secondary TLV in SRPL Candidate requests.  MUST NOT
+   appear in any other SRPL request or response.
 
 3.3.5.  SRPL Host Message
 
    DSO-TYPE code: SRPLHostMessage.  In an SRPL Host request, conveys
    four data objects in order:
+
+
+
+Lemon, et al.            Expires 24 August 2023                [Page 19]
+
+Internet-Draft           DNS-SD SRP Replication            February 2023
+
 
    *  the lease time and key lease time returned to the client,
       represented as two unsigned 32-bit numbers in units of seconds.
@@ -1115,15 +1110,17 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
    key ID of the SRP client.  The value is an unsigned 32-bit number and
    calculated as described in Section 2.9.1.
 
-
-
-Lemon, et al.            Expires 12 January 2023               [Page 20]
-
-Internet-Draft           DNS-SD SRP Replication                July 2022
-
-
    Required as a secondary TLV in SRPL Candidate requests.  MUST NOT
    appear in any other SRPL request or response.
+
+
+
+
+
+Lemon, et al.            Expires 24 August 2023                [Page 20]
+
+Internet-Draft           DNS-SD SRP Replication            February 2023
+
 
 3.3.8.  SRPL New Partner
 
@@ -1164,20 +1161,6 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
    target host and port where DNS-SD SRP Replication Service is provided
    for the named domain.
 
-
-
-
-
-
-
-
-
-
-Lemon, et al.            Expires 12 January 2023               [Page 21]
-
-Internet-Draft           DNS-SD SRP Replication                July 2022
-
-
 6.2.  DSO TLV type code
 
    The IANA is requested to add the following entries to the 16-bit DSO
@@ -1185,6 +1168,15 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
    allocated type code, both in this table and elsewhere in the
    document.  RFC-TBD should be replaced with the name of this document
    once it becomes an RFC.
+
+
+
+
+
+Lemon, et al.            Expires 24 August 2023                [Page 21]
+
+Internet-Draft           DNS-SD SRP Replication            February 2023
+
 
     +--------------------+---------------+-------+--------+-----------+
     | Type               | Name          | Early | Status | Reference |
@@ -1224,16 +1216,6 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
 
                                   Table 1
 
-
-
-
-
-
-Lemon, et al.            Expires 12 January 2023               [Page 22]
-
-Internet-Draft           DNS-SD SRP Replication                July 2022
-
-
 6.3.  Registration and Delegation of 'local.arpa' as a Special-Use
       Domain Name
 
@@ -1241,6 +1223,16 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
    Special-Use Domain Names registry [SUDN].  IANA is requested, with
    the approval of IAB, to implement the delegation requested in
    Section 5.
+
+
+
+
+
+
+Lemon, et al.            Expires 24 August 2023                [Page 22]
+
+Internet-Draft           DNS-SD SRP Replication            February 2023
+
 
    IANA is further requested to add a new entry to the "Transport-
    Independent Locally-Served Zones" subregistry of the the "Locally-
@@ -1283,17 +1275,20 @@ Internet-Draft           DNS-SD SRP Replication                July 2022
               'home.arpa.'", RFC 8375, DOI 10.17487/RFC8375, May 2018,
               <https://www.rfc-editor.org/info/rfc8375>.
 
-
-
-Lemon, et al.            Expires 12 January 2023               [Page 23]
-
-Internet-Draft           DNS-SD SRP Replication                July 2022
-
-
    [RFC8490]  Bellis, R., Cheshire, S., Dickinson, J., Dickinson, S.,
               Lemon, T., and T. Pusateri, "DNS Stateful Operations",
               RFC 8490, DOI 10.17487/RFC8490, March 2019,
               <https://www.rfc-editor.org/info/rfc8490>.
+
+
+
+
+
+
+Lemon, et al.            Expires 24 August 2023                [Page 23]
+
+Internet-Draft           DNS-SD SRP Replication            February 2023
+
 
    [SUDN]     "Special-Use Domain Names Registry", July 2012,
               <https://www.iana.org/assignments/special-use-domain-
@@ -1341,4 +1336,9 @@ Authors' Addresses
 
 
 
-Lemon, et al.            Expires 12 January 2023               [Page 24]
+
+
+
+
+
+Lemon, et al.            Expires 24 August 2023                [Page 24]
