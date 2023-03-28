@@ -74,37 +74,37 @@ Table of Contents
      2.3.  Discovering other replication services  . . . . . . . . .   8
      2.4.  Startup . . . . . . . . . . . . . . . . . . . . . . . . .   8
        2.4.1.  Determining an SRP zone name  . . . . . . . . . . . .   9
-       2.4.2.  Determining a Dataset ID  . . . . . . . . . . . . . .   9
-     2.5.  Discovering the addresses of partners . . . . . . . . . .  10
-     2.6.  Partner ID  . . . . . . . . . . . . . . . . . . . . . . .  10
-     2.7.  Establishing Communication with a replication partner . .  10
-     2.8.  Incoming connections  . . . . . . . . . . . . . . . . . .  11
-     2.9.  Initial synchronization . . . . . . . . . . . . . . . . .  11
-       2.9.1.  Sending candidates  . . . . . . . . . . . . . . . . .  12
-     2.10. Routine Operation . . . . . . . . . . . . . . . . . . . .  13
-   3.  Protocol Details  . . . . . . . . . . . . . . . . . . . . . .  13
-     3.1.  DNS Stateful Operations considerations  . . . . . . . . .  13
+       2.4.2.  Determining a Dataset ID  . . . . . . . . . . . . . .  10
+     2.5.  Discovering the addresses of partners . . . . . . . . . .  11
+     2.6.  Partner ID  . . . . . . . . . . . . . . . . . . . . . . .  11
+     2.7.  Establishing Communication with a replication partner . .  11
+     2.8.  Incoming connections  . . . . . . . . . . . . . . . . . .  12
+     2.9.  Initial synchronization . . . . . . . . . . . . . . . . .  12
+       2.9.1.  Sending candidates  . . . . . . . . . . . . . . . . .  13
+     2.10. Routine Operation . . . . . . . . . . . . . . . . . . . .  14
+   3.  Protocol Details  . . . . . . . . . . . . . . . . . . . . . .  14
+     3.1.  DNS Stateful Operations considerations  . . . . . . . . .  14
        3.1.1.  DSO Session Establishment . . . . . . . . . . . . . .  14
-       3.1.2.  DSO Session maintenance . . . . . . . . . . . . . . .  14
-     3.2.  SRPL Messages . . . . . . . . . . . . . . . . . . . . . .  14
-       3.2.1.  SRPL Session  . . . . . . . . . . . . . . . . . . . .  14
-       3.2.2.  SRPL Send Candidates  . . . . . . . . . . . . . . . .  15
-       3.2.3.  SRPL Candidate  . . . . . . . . . . . . . . . . . . .  16
-       3.2.4.  SRPL Host . . . . . . . . . . . . . . . . . . . . . .  17
-     3.3.  DSO Secondary TLVs  . . . . . . . . . . . . . . . . . . .  18
-       3.3.1.  SRPL Candidate Yes  . . . . . . . . . . . . . . . . .  19
-       3.3.2.  SRPL Candidate No . . . . . . . . . . . . . . . . . .  19
-       3.3.3.  SRPL Conflict . . . . . . . . . . . . . . . . . . . .  19
-       3.3.4.  SRPL Hostname . . . . . . . . . . . . . . . . . . . .  19
-       3.3.5.  SRPL Host Message . . . . . . . . . . . . . . . . . .  19
-       3.3.6.  SRPL Time Offset  . . . . . . . . . . . . . . . . . .  20
-       3.3.7.  SRPL Key ID . . . . . . . . . . . . . . . . . . . . .  20
-       3.3.8.  SRPL New Partner  . . . . . . . . . . . . . . . . . .  21
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .  21
-   5.  Delegation of 'local.arpa.' . . . . . . . . . . . . . . . . .  21
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  21
-     6.1.  'srpl-tls' Service Name . . . . . . . . . . . . . . . . .  21
-     6.2.  DSO TLV type code . . . . . . . . . . . . . . . . . . . .  21
+       3.1.2.  DSO Session maintenance . . . . . . . . . . . . . . .  15
+     3.2.  SRPL Messages . . . . . . . . . . . . . . . . . . . . . .  15
+       3.2.1.  SRPL Session  . . . . . . . . . . . . . . . . . . . .  15
+       3.2.2.  SRPL Send Candidates  . . . . . . . . . . . . . . . .  16
+       3.2.3.  SRPL Candidate  . . . . . . . . . . . . . . . . . . .  17
+       3.2.4.  SRPL Host . . . . . . . . . . . . . . . . . . . . . .  18
+     3.3.  DSO Secondary TLVs  . . . . . . . . . . . . . . . . . . .  19
+       3.3.1.  SRPL Candidate Yes  . . . . . . . . . . . . . . . . .  20
+       3.3.2.  SRPL Candidate No . . . . . . . . . . . . . . . . . .  20
+       3.3.3.  SRPL Conflict . . . . . . . . . . . . . . . . . . . .  20
+       3.3.4.  SRPL Hostname . . . . . . . . . . . . . . . . . . . .  20
+       3.3.5.  SRPL Host Message . . . . . . . . . . . . . . . . . .  20
+       3.3.6.  SRPL Time Offset  . . . . . . . . . . . . . . . . . .  21
+       3.3.7.  SRPL Key ID . . . . . . . . . . . . . . . . . . . . .  21
+       3.3.8.  SRPL New Partner  . . . . . . . . . . . . . . . . . .  22
+   4.  Security Considerations . . . . . . . . . . . . . . . . . . .  22
+   5.  Delegation of 'local.arpa.' . . . . . . . . . . . . . . . . .  22
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  22
+     6.1.  'srpl-tls' Service Name . . . . . . . . . . . . . . . . .  22
+     6.2.  DSO TLV type code . . . . . . . . . . . . . . . . . . . .  22
 
 
 
@@ -115,10 +115,10 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
      6.3.  Registration and Delegation of 'local.arpa' as a
-           Special-Use Domain Name . . . . . . . . . . . . . . . . .  22
-   7.  Informative References  . . . . . . . . . . . . . . . . . . .  23
-   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  23
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
+           Special-Use Domain Name . . . . . . . . . . . . . . . . .  23
+   7.  Informative References  . . . . . . . . . . . . . . . . . . .  24
+   8.  Normative References  . . . . . . . . . . . . . . . . . . . .  24
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  25
 
 1.  Introduction
 
@@ -427,20 +427,20 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
    and picks a random discovery time interval uniformly selected from
    the range [MIN_PARNTER_DISCOVERY_INTERVAL,
    MAX_PARTNER_DISCOVERY_INTERVAL].  The recommended minimum and maximum
-   values are 4 and 7.5 seconds, respectively.
+   values are 4 and 7.5 seconds, respectively.  The new partner uses the
+   discovery time to (1) discover and determine the preferred dataset
+   ID, (2) find all existing SRPL partners, establish SRPL sessions with
+   them and synchronize with them.  The randomness introduced in the
+   start time helps to handle the situation where a group of SRPL
+   partners start around the same time, for example, triggered by a
+   power outage.
 
-   When the discovery time interval expires, the SRPL partner
-   transitions to the "routine operation" state (Section 2.10) after it
-   has either successfully synchronized with or
-   NUM_DISCOVERY_SYNC_ATTEMPTS have occurred with each discovered
-   partner.  If the partner did not discover any other SRPL partners to
-   synchronize with, it immediately transitions to the "routine
-   operation" state.
-
-
-
-
-
+   When the discovery time interval expires, if the partner did not
+   discover any other SRPL partners to synchronize with, it transitions
+   to the "routine operation" state (Section 2.10).  If it discovers
+   other SRPL partners, it can enter "routine operation" state after one
+   of the following conditions are met for every partner it discovered
+   during the discovery interval:
 
 
 
@@ -449,6 +449,43 @@ Lemon, et al.            Expires 24 August 2023                 [Page 8]
 
 Internet-Draft           DNS-SD SRP Replication            February 2023
 
+
+   *  The new partner has established an SRPL session with the
+      discovered partner and successfully finished initial
+      synchronization (Section 2.9).
+
+   *  The new partner has failed to establish a connection and
+      synchronize with the discovered partner (on any of its discovered
+      addresses) for at least DISCOVERY_SYNC_TIMEOUT interval since the
+      first connection attempt.  If the DISCOVERY_SYNC_TIMEOUT expires
+      in the middle of an ongoing SRPL session establishment or initial
+      synchronization with the discovered partner, the new partner MUST
+      wait until the initial synchronization is either successfully
+      completed or fails.  The recommended value for
+      DISCOVERY_SYNC_TIMEOUT is 5 seconds.
+
+   The new partner can start establishing an SRPL session with a
+   discovered partner immediately upon discovering it while in the
+   discovery interval.  Therefore, typically by the end of the discovery
+   interval, the condition to enter "routine operation" is already
+   satisfied.  The DISCOVERY_SYNC_TIMEOUT handles the situation when a
+   previous partner, which is now offline, is still discovered due to
+   stale cache DNS-SD entries.  It ensures that the new partner can
+   enter the "routine operation" state after enough failed attempts.
+   After DISCOVERY_SYNC_TIMEOUT the partner can still try to reconnect
+   with the discovered partner but it does not wait for a successful
+   synchronization with this partner for it to transition to the
+   "routine operation" state.
+
+   Only the partners that are discovered during the discovery interval
+   MUST be considered for the condition when the new partner can enter
+   "routine operation" state.  While the new partner can try to
+   synchronize with any partners it discovers after the discovery
+   interval, it does not need to wait to finish synchronization with
+   them before it can enter "routine operation" state.  This ensures
+   that the new partner always enters "routine operation" after certain
+   amount of time and new partner discoveries cannot push back the
+   transition to "routine operation" state.
 
 2.4.1.  Determining an SRP zone name
 
@@ -461,6 +498,13 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
    the same domain name.  When the SRPL partner transitions to the
    "routine operation" state, it will advertise the adopted domain name
    and sets the 'join=yes' key/value pair in the TXT record.
+
+
+
+Lemon, et al.            Expires 24 August 2023                 [Page 9]
+
+Internet-Draft           DNS-SD SRP Replication            February 2023
+
 
    When the discovery time interval expires, if the SRPL partner is not
    configured with a domain name and was not able to adopt a domain
@@ -498,19 +542,25 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
    another one).  In this case, the dataset ID that is largest using
    absolute value comparison is the preferred dataset ID.
 
-
-
-
-Lemon, et al.            Expires 24 August 2023                 [Page 9]
-
-Internet-Draft           DNS-SD SRP Replication            February 2023
-
-
    If at any time (regardless of "startup" or "routine operation" state)
    an SRPL partner discovers that it is synchronizing with a non-
    preferred dataset ID, it MUST abandon that dataset, re-enter the
    "startup" state, and attempt to synchronize with the (newly
    discovered) preferred dataset id.
+
+
+
+
+
+
+
+
+
+
+Lemon, et al.            Expires 24 August 2023                [Page 10]
+
+Internet-Draft           DNS-SD SRP Replication            February 2023
+
 
 2.5.  Discovering the addresses of partners
 
@@ -553,21 +603,20 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
    state, the partner does not advertise its SRP replication service so
    other partners cannot discover it over DNS-SD.
 
-
-
-
-
-Lemon, et al.            Expires 24 August 2023                [Page 10]
-
-Internet-Draft           DNS-SD SRP Replication            February 2023
-
-
    If the partner is in the "routine operation" state, it uses the
    partner ID to determine which partner should initiate the connection.
    If the partner determines that its own partner ID is larger, it MUST
    initiate the connection.  Otherwise, the partner MUST NOT initiate
    the connection.  Implementations MUST follow the Serial Number
    Arithmetic as defined in [RFC1982] when comparing two partner IDs.
+
+
+
+
+Lemon, et al.            Expires 24 August 2023                [Page 11]
+
+Internet-Draft           DNS-SD SRP Replication            February 2023
+
 
    When a connection fails and if there are multiple addresses
    associated with partner, the connecting partner advances to the next
@@ -608,19 +657,22 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
    response to the SRPL Session message and waits for the connecting
    partner to request a list of update candidates.
 
-
-
-
-
-
-Lemon, et al.            Expires 24 August 2023                [Page 11]
-
-Internet-Draft           DNS-SD SRP Replication            February 2023
-
-
    The connecting partner waits for a response to the SRPL Session
    message, and when it is received, requests that the server send
    candidates.
+
+
+
+
+
+
+
+
+
+Lemon, et al.            Expires 24 August 2023                [Page 12]
+
+Internet-Draft           DNS-SD SRP Replication            February 2023
+
 
 2.9.1.  Sending candidates
 
@@ -665,18 +717,18 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
    When a partner is finished iterating across its list of candidates,
    it sends a "send candidates" response.
 
-
-
-
-
-Lemon, et al.            Expires 24 August 2023                [Page 12]
-
-Internet-Draft           DNS-SD SRP Replication            February 2023
-
-
    When a partner receives a "send candidates" response, if it is the
    server, it sends its own "send candidates" message, and processes any
    proposed candidates.
+
+
+
+
+
+Lemon, et al.            Expires 24 August 2023                [Page 13]
+
+Internet-Draft           DNS-SD SRP Replication            February 2023
+
 
    When a partner that is a server receives a "send candidates"
    response, it goes into the "routine operation" state.  When a partner
@@ -718,23 +770,21 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
    protocol.  DNS Push session management includes session establishment
    as well as session maintenance.
 
-
-
-
-
-
-
-
-Lemon, et al.            Expires 24 August 2023                [Page 13]
-
-Internet-Draft           DNS-SD SRP Replication            February 2023
-
-
 3.1.1.  DSO Session Establishment
 
    An DSO session for an SRPL connection can be established either by
    simply sending the first SRPL message, or by sending a DSO Keepalive
    message.  Section 5.1 of [RFC8490].
+
+
+
+
+
+
+Lemon, et al.            Expires 24 August 2023                [Page 14]
+
+Internet-Draft           DNS-SD SRP Replication            February 2023
+
 
 3.1.2.  DSO Session maintenance
 
@@ -781,7 +831,13 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 
-Lemon, et al.            Expires 24 August 2023                [Page 14]
+
+
+
+
+
+
+Lemon, et al.            Expires 24 August 2023                [Page 15]
 
 Internet-Draft           DNS-SD SRP Replication            February 2023
 
@@ -837,7 +893,7 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 
-Lemon, et al.            Expires 24 August 2023                [Page 15]
+Lemon, et al.            Expires 24 August 2023                [Page 16]
 
 Internet-Draft           DNS-SD SRP Replication            February 2023
 
@@ -893,7 +949,7 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 
-Lemon, et al.            Expires 24 August 2023                [Page 16]
+Lemon, et al.            Expires 24 August 2023                [Page 17]
 
 Internet-Draft           DNS-SD SRP Replication            February 2023
 
@@ -949,7 +1005,7 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 
-Lemon, et al.            Expires 24 August 2023                [Page 17]
+Lemon, et al.            Expires 24 August 2023                [Page 18]
 
 Internet-Draft           DNS-SD SRP Replication            February 2023
 
@@ -1005,7 +1061,7 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 
-Lemon, et al.            Expires 24 August 2023                [Page 18]
+Lemon, et al.            Expires 24 August 2023                [Page 19]
 
 Internet-Draft           DNS-SD SRP Replication            February 2023
 
@@ -1061,7 +1117,7 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 
-Lemon, et al.            Expires 24 August 2023                [Page 19]
+Lemon, et al.            Expires 24 August 2023                [Page 20]
 
 Internet-Draft           DNS-SD SRP Replication            February 2023
 
@@ -1117,7 +1173,7 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 
-Lemon, et al.            Expires 24 August 2023                [Page 20]
+Lemon, et al.            Expires 24 August 2023                [Page 21]
 
 Internet-Draft           DNS-SD SRP Replication            February 2023
 
@@ -1173,7 +1229,7 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 
-Lemon, et al.            Expires 24 August 2023                [Page 21]
+Lemon, et al.            Expires 24 August 2023                [Page 22]
 
 Internet-Draft           DNS-SD SRP Replication            February 2023
 
@@ -1229,7 +1285,7 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 
-Lemon, et al.            Expires 24 August 2023                [Page 22]
+Lemon, et al.            Expires 24 August 2023                [Page 23]
 
 Internet-Draft           DNS-SD SRP Replication            February 2023
 
@@ -1285,7 +1341,7 @@ Internet-Draft           DNS-SD SRP Replication            February 2023
 
 
 
-Lemon, et al.            Expires 24 August 2023                [Page 23]
+Lemon, et al.            Expires 24 August 2023                [Page 24]
 
 Internet-Draft           DNS-SD SRP Replication            February 2023
 
@@ -1341,4 +1397,4 @@ Authors' Addresses
 
 
 
-Lemon, et al.            Expires 24 August 2023                [Page 24]
+Lemon, et al.            Expires 24 August 2023                [Page 25]
