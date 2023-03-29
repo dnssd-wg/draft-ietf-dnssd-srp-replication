@@ -193,13 +193,14 @@
           <dt>join</dt><dd>'yes' or 'no'. Indicates whether other SRP replication servers are invited to join in replicating the dataset.</dd>
           <dt>pid</dt><dd>a 64-bit number encoded as hexadecimal ASCII. The partner ID to uniquely identify a SRP partner, as described in <xref target="partner-id"/>.</dd>
           <dt>dn</dt><dd>the domain name that this dataset is intended to represent</dd>
+          <dt>nid</dt><dd>a 64-bit number encoded as hexadecimal ASCII. The network ID to identify the network on which SRP replication server is operating. For SRP replication operating on a Thread Border Router, it MUST indicate the the Extended PAN Identifier of the Thread network. This key is optional and can be omitted for other networks.</dd>
         </dl>
 
         <t>So in our example, the TXT record might look like this:</t>
 
-        <t>\031dn=openthread.thread.home.arpa.\020did=eb5bb51919a15cec\020pid=2cde2bed200126af\008join=yes</t>
+        <t>\031dn=openthread.thread.home.arpa.\020did=eb5bb51919a15cec\020pid=2cde2bed200126af\020nid=a7200b57a6dfc32c\008join=yes</t>
 
-        <t>(Note that each name/value pair in the TXT record is length-encoded, so the '\031`, the two '\020', and the '\008' are the lengths of the name/value pairs.)</t>
+        <t>(Note that each name/value pair in the TXT record is length-encoded, so the '\031`, the three '\020', and the '\008' are the lengths of the name/value pairs.)</t>
 
       </section>
       <section anchor="discovering-other-replication-services">
@@ -234,9 +235,12 @@
 
           <t>The dataset ID is a 64-bit number that identifies the set of data replicated by a set of cooperating SRPL partners. Ideally, there should be exactly one dataset ID per domain. However, it is possible for several independent sets of SRPL partners to replicate a particular domain, for example when some SRPL partners are unable to discover each other. When the SRPL partners are able to discover each other again, the sets of partners must converge on a single dataset using the dataset ID.</t>
 
-          <t>If an SRPL partner does not discover any other partners advertising the same domain in the "startup" state <xref target="startup"/>, it generates a new dataset ID when entering the "routine operation" state. SRPL partners MUST persist the highest (most significant byte or MSB) of the dataset ID in non-volatile memory. When generating a new dataset ID, the partner MUST increment the MSB of last used dataset ID to use as MSB of new dataset ID and populate the lower 56 bits randomly using a high-quality random number generator <xref target="RFC4086"/>. If there is no previously saved ID, then the partner randomly generates the entire 64-bit ID.</t>
+          <t>If the SRP replication partner is aware of the network on which it operates, it can ignore SRPL partners that do not match the same network ID.</t>
+
+          <t>If an SRPL partner does not discover any other partners advertising the same domain (and same network ID if known) in the "startup" state <xref target="startup"/>, it generates a new dataset ID when entering the "routine operation" state. SRPL partners MUST persist the highest (most significant byte or MSB) of the dataset ID in non-volatile memory. When generating a new dataset ID, the partner MUST increment the MSB of last used dataset ID to use as MSB of new dataset ID and populate the lower 56 bits randomly using a high-quality random number generator <xref target="RFC4086"/>. If there is no previously saved ID, then the partner randomly generates the entire 64-bit ID.</t>
 
           <t>When multiple dataset IDs exist for a given domain, the largest dataset ID is the preferred dataset ID. Implementations MUST follow the Serial Number Arithmetic as defined in <xref target="RFC1982"/> when comparing two dataset IDs. When using Serial Number Arithmetic with three or more IDs, it is possible that the largest value may not be well-defined (it is possible to have three IDs each being "larger" than another one). In this case, the dataset ID that is largest using absolute value comparison is the preferred dataset ID.</t>
+
 
           <t>If at any time (regardless of "startup" or "routine operation" state) an SRPL partner discovers that it is synchronizing with a non-preferred dataset ID, it MUST abandon that dataset, re-enter the "startup" state, and attempt to synchronize with the (newly discovered) preferred dataset id.</t>
 
