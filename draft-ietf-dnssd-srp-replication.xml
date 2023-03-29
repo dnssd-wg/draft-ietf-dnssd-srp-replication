@@ -284,7 +284,7 @@
 
         <t>While a partner is in the "startup" state (<xref target="startup"/>) it initiates connections with the other discovered partners. In the "startup" state, the partner does not advertise its SRP replication service so other partners cannot discover it over DNS-SD.</t>
 
-        <t>If the partner is in the "routine operation" state, it uses the partner ID to determine which partner should initiate the connection. If the partner determines that its own partner ID is larger, it MUST initiate the connection. Otherwise, the partner MUST NOT initiate the connection. Implementations MUST follow the Serial Number Arithmetic as defined in <xref target="RFC1982"/> when comparing two partner IDs.</t>
+        <t>If the partner is in the "routine operation" state, it uses the partner ID to determine which partner should initiate the connection. If the partner determines that its own partner ID is larger, it MUST initiate the connection. Otherwise, the partner MUST NOT initiate the connection. To determine the larger Partner ID implementations MUST use normal numerical value comparison unlike Dataset ID comparison which uses the Serial Number Arithmetic.</t>
 
         <t>When a connection fails and if there are multiple addresses associated with partner, the connecting partner advances to the next address in the list. If there are no remaining addresses, the partner sets a timer for RECONNECT_INTERVAL seconds. When this timer expires, it starts again at the beginning of the list and attempts to connect to the first address, iterating again across the list until a connection succeeds or it runs out of addresses.</t>
 
