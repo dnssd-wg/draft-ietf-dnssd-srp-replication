@@ -1,0 +1,3 @@
+# Automatically generated CODEOWNERS
+# Regenerate with `make update-codeowners`
+draft-ietf-dnssd-srp-replication.xml mellon@fugue.com abtink@google.com jonhui@google.com
