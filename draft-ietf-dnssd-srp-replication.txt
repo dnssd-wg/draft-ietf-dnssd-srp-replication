@@ -5,9 +5,9 @@
 Internet Engineering Task Force                                 T. Lemon
 Internet-Draft                                                Apple Inc.
 Intended status: Standards Track                         A. Keshavarzian
-Expires: 15 October 2023                                          J. Hui
+Expires: 5 September 2024                                         J. Hui
                                                                   Google
-                                                           13 April 2023
+                                                            4 March 2024
 
 
   Automatic Replication of DNS-SD Service Registration Protocol Zones
@@ -53,11 +53,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 October 2023.
+   This Internet-Draft will expire on 5 September 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -495,8 +495,9 @@ Table of Contents
    partner ID to determine which partner should initiate the connection.
    If the partner determines that its own partner ID is larger, it MUST
    initiate the connection.  Otherwise, the partner MUST NOT initiate
-   the connection.  Implementations MUST follow the Serial Number
-   Arithmetic as defined in [RFC1982] when comparing two partner IDs.
+   the connection.  To determine the larger Partner ID implementations
+   MUST use normal numerical value comparison unlike Dataset ID
+   comparison which uses the Serial Number Arithmetic.
 
    When a connection fails and if there are multiple addresses
    associated with partner, the connecting partner advances to the next
