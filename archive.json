@@ -1,0 +1,527 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2023-05-07T01:01:25.479912+00:00",
+  "repo": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 9,
+      "id": "I_kwDOG2KAPs5kuX_0",
+      "title": "Remove fixed port number 853",
+      "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/issues/9",
+      "state": "OPEN",
+      "author": "EskoDijk",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Search for string \"853\" in text to find the instances. This needs to be reformulated to allowing any (free?) port number.",
+      "createdAt": "2023-04-30T11:19:50Z",
+      "updatedAt": "2023-04-30T11:19:50Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOG2KAPs4y1bJB",
+      "title": "Convert all indentation to space (remove tab use)",
+      "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/pull/1",
+      "state": "MERGED",
+      "author": "abtink",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\r\nThis PR contains no content change and is only style\r\n(replacting tabs with 8 space chars). ",
+      "createdAt": "2022-02-15T06:18:35Z",
+      "updatedAt": "2022-02-16T08:56:34Z",
+      "baseRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "baseRefName": "main",
+      "baseRefOid": "3529523b4643203b1072d4ec412519e9691dbfa5",
+      "headRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "headRefName": "abtink/format-newline",
+      "headRefOid": "c93a7675e6b9295fa9360dd9e5908201c2cf67b9",
+      "closedAt": "2022-02-16T08:56:34Z",
+      "mergedAt": "2022-02-16T08:56:34Z",
+      "mergedBy": "abtink",
+      "mergeCommit": {
+        "oid": "9bf1ad292d6a7df96164cd00a48450ae60566386"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOG2KAPs40UfgM",
+      "title": "New draft (v2)",
+      "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/pull/2",
+      "state": "MERGED",
+      "author": "abtink",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Draft 2 edits\r\n\r\nThe git diff for `draft-srp-replication.xml` file may not be easy to read/review, so other files are added in the branch.\r\n- The formatted text (new draft):  [draft-srp-replication.txt](https://github.com/abtink/srpl_draft/blob/new-draft/draft-srp-replication.txt)\r\n- The formatted diff vs draft 1  (as pdf): [Diff: draft-lemon-srp-replication-01.txt - draft-srp-replication.pdf](https://github.com/abtink/srpl_draft/blob/new-draft/Diff:%20draft-lemon-srp-replication-01.txt%20-%20draft-srp-replication.pdf)\r\n",
+      "createdAt": "2022-03-11T20:19:41Z",
+      "updatedAt": "2022-07-11T19:04:30Z",
+      "baseRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "baseRefName": "main",
+      "baseRefOid": "9bf1ad292d6a7df96164cd00a48450ae60566386",
+      "headRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "headRefName": "new-draft",
+      "headRefOid": "53f47c7280adad34a68afc50bf5e01980a847b92",
+      "closedAt": "2022-07-11T19:04:30Z",
+      "mergedAt": "2022-07-11T19:04:30Z",
+      "mergedBy": "abtink",
+      "mergeCommit": {
+        "oid": "35132ca30fb2868a320f493fe71a22669fa7fbaf"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOG2KAPs47NwQ1",
+      "title": "Update date & add abtink and jonhui as authors",
+      "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/pull/3",
+      "state": "MERGED",
+      "author": "abtink",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-07-11T19:15:37Z",
+      "updatedAt": "2022-07-11T19:15:52Z",
+      "baseRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "baseRefName": "main",
+      "baseRefOid": "35132ca30fb2868a320f493fe71a22669fa7fbaf",
+      "headRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "headRefName": "abtink/update-date",
+      "headRefOid": "a609e9d93d001261c0fa66561cf0dfb06989dc8c",
+      "closedAt": "2022-07-11T19:15:52Z",
+      "mergedAt": "2022-07-11T19:15:52Z",
+      "mergedBy": "abtink",
+      "mergeCommit": {
+        "oid": "ad95cc1f6a17614f2593c00517ef578fa0ce8498"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOG2KAPs5KdSxx",
+      "title": "Update second TLVs for Host msg (remove hostname/key-id)",
+      "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/pull/4",
+      "state": "MERGED",
+      "author": "abtink",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Remove `HostName` and `KeyId` as requird second TLVs in `Host` message\r\n- Update the date and increment title version to \"03`",
+      "createdAt": "2023-02-21T19:52:19Z",
+      "updatedAt": "2023-02-22T21:38:17Z",
+      "baseRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "baseRefName": "main",
+      "baseRefOid": "ad95cc1f6a17614f2593c00517ef578fa0ce8498",
+      "headRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "headRefName": "abtink/update-second-tlv-in-host-msg",
+      "headRefOid": "05c70eae7b7fd1889b0ce87260d04c131fe3df96",
+      "closedAt": "2023-02-22T21:38:17Z",
+      "mergedAt": "2023-02-22T21:38:17Z",
+      "mergedBy": "abtink",
+      "mergeCommit": {
+        "oid": "a3b71974cf9fa87b7fb65fb09deb3dd42b5c4ce6"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOG2KAPs5NHfa6",
+      "title": "More detail on startup state and entering routine operation",
+      "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/pull/5",
+      "state": "CLOSED",
+      "author": "abtink",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-29T00:57:50Z",
+      "updatedAt": "2023-05-04T20:18:30Z",
+      "baseRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "baseRefName": "main",
+      "baseRefOid": "a3b71974cf9fa87b7fb65fb09deb3dd42b5c4ce6",
+      "headRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "headRefName": "pr1/more-detail-on-discovery-time",
+      "headRefOid": "8e966f9068aa4c9d6e8fc3b2ed966d5f55628bea",
+      "closedAt": "2023-05-04T20:18:30Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "abtink",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing this PR in favor of https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/pull/10",
+          "createdAt": "2023-05-04T20:18:30Z",
+          "updatedAt": "2023-05-04T20:18:30Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOG2KAPs5NHkIu",
+      "title": "add `nid` key in TXT record for \"network ID\" (xpan id in Thread BR)",
+      "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/pull/6",
+      "state": "CLOSED",
+      "author": "abtink",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-29T01:24:52Z",
+      "updatedAt": "2023-05-04T20:12:42Z",
+      "baseRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "baseRefName": "main",
+      "baseRefOid": "a3b71974cf9fa87b7fb65fb09deb3dd42b5c4ce6",
+      "headRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "headRefName": "abtink/new-txt-key-values",
+      "headRefOid": "02f1596078a4b25984cd9fe5c50b3ad4f46d251f",
+      "closedAt": "2023-05-04T20:12:41Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "abtink",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing this PR as different approach is being considered for this.",
+          "createdAt": "2023-05-04T20:12:41Z",
+          "updatedAt": "2023-05-04T20:12:41Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOG2KAPs5NHlNR",
+      "title": "larger partner ID",
+      "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/pull/7",
+      "state": "OPEN",
+      "author": "abtink",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Related [discussion on dns-sd mailing list](https://mailarchive.ietf.org/arch/msg/dnssd/L3yzip6Ja0-sDT5gXuGnrapOYqc/).",
+      "createdAt": "2023-03-29T01:33:17Z",
+      "updatedAt": "2023-05-04T22:43:41Z",
+      "baseRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "baseRefName": "main",
+      "baseRefOid": "ac17d9791b9bdc51a177728b01bf96d94ad95f31",
+      "headRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "headRefName": "abtink/chnage-pid-compare-rule",
+      "headRefOid": "8e31a769d6a0d46d38c1bfa402e1aff9e7722fe1",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOG2KAPs5OLKT7",
+      "title": "rename file - change version to 00",
+      "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/pull/8",
+      "state": "MERGED",
+      "author": "abtink",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-04-12T22:02:30Z",
+      "updatedAt": "2023-04-12T22:03:54Z",
+      "baseRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "baseRefName": "main",
+      "baseRefOid": "a3b71974cf9fa87b7fb65fb09deb3dd42b5c4ce6",
+      "headRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "headRefName": "abtink/change-name-and-reset-to-000",
+      "headRefOid": "d6f4f0a54d597d965decea946aaed34b4bea345c",
+      "closedAt": "2023-04-12T22:03:54Z",
+      "mergedAt": "2023-04-12T22:03:54Z",
+      "mergedBy": "abtink",
+      "mergeCommit": {
+        "oid": "210dbaae273f105a8c88b8f128447b4fced2a0a7"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOG2KAPs5Pz8UQ",
+      "title": "More details on start state and entering routine operation",
+      "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/pull/10",
+      "state": "OPEN",
+      "author": "abtink",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Related  [discussion on dnssd mailing list](https://mailarchive.ietf.org/arch/msg/dnssd/xVbh9g9DRcqUIIgTnnjF1Oc4EcA/).",
+      "createdAt": "2023-05-04T20:18:07Z",
+      "updatedAt": "2023-05-04T22:26:31Z",
+      "baseRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "baseRefName": "main",
+      "baseRefOid": "ac17d9791b9bdc51a177728b01bf96d94ad95f31",
+      "headRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
+      "headRefName": "abtink/more-detail-on-discovery-time",
+      "headRefOid": "c0bdf9ea6ee1806df34b60b6eb3901cba0b53a39",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "abtink",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I know that it's traditional in e.g. Matter and Thread to do work like this in the Jira or in github, but for IETF work this stuff should be announced on the mailing list. I don't think it's a bad thing to open an issue, but not everybody in the working group will see it if you don't also mention it on the mailing list.\r\n\r\n- This PR is adding what we already discussed in the mailing list earlier (I promised to add the clarifications)\r\n- I did add the link to the mailing list discussion in the PR description above already.\r\n\r\n----\r\n\r\nEdit: Just added the link PR on the same dns-sd [email chain](https://mailarchive.ietf.org/arch/msg/dnssd/VsDK52ig747QRMWW2qlLTcZAxwE/).\r\n\r\n@Abhayakara, @jwhui  I like us to follow the policy that every PR in this repo (making larger changes to the text) should provide a link to the related discussion on dns-sd mailing list. \r\n\r\n",
+          "createdAt": "2023-05-04T22:15:04Z",
+          "updatedAt": "2023-05-04T22:26:31Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOG2KAPs5URc8C",
+          "commit": {
+            "abbreviatedOid": "c0bdf9e"
+          },
+          "author": "jwhui",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-05-04T20:30:19Z",
+          "updatedAt": "2023-05-04T20:33:00Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\n          <li>The new partner has established an SRPL session with a discovered partner and successfully finished initial synchronization (<xref target=\"initial-synchronization\"/>).</li>\r\n```",
+              "createdAt": "2023-05-04T20:30:19Z",
+              "updatedAt": "2023-05-04T20:33:00Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\n          <li>The new partner failed to establish a connection and synchronize any discovered partner (on any of their discovered addresses) for at least DISCOVERY_SYNC_TIMEOUT interval since the first connection attempt.  If the DISCOVERY_SYNC_TIMEOUT expires in the middle of an ongoing SRPL session establishment or initial synchronization with the discovered partner, the new partner MUST wait until the initial synchronization is either successfully completed or fails. The recommended value for DISCOVERY_SYNC_TIMEOUT is 5 seconds.</li>\r\n```",
+              "createdAt": "2023-05-04T20:32:14Z",
+              "updatedAt": "2023-05-04T20:33:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOG2KAPs5UR46_",
+          "commit": {
+            "abbreviatedOid": "c0bdf9e"
+          },
+          "author": "Abhayakara",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-05-04T21:57:28Z",
+          "updatedAt": "2023-05-04T21:57:28Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "I know that it's traditional in e.g. Matter and Thread to do work like this in the Jira or in github, but for IETF work this stuff should be announced on the mailing list. I don't think it's a bad thing to open an issue, but not everybody in the working group will see it if you don't also mention it on the mailing list.",
+              "createdAt": "2023-05-04T21:57:28Z",
+              "updatedAt": "2023-05-04T21:57:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOG2KAPs5UR5VB",
+          "commit": {
+            "abbreviatedOid": "c0bdf9e"
+          },
+          "author": "jwhui",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-05-04T21:59:33Z",
+          "updatedAt": "2023-05-04T21:59:34Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Is it sufficient to post a link to this PR on the mailing list? Or should we post the proposed text on the mailing list so that we can discuss/edit there?",
+              "createdAt": "2023-05-04T21:59:33Z",
+              "updatedAt": "2023-05-04T21:59:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOG2KAPs5UR6p4",
+          "commit": {
+            "abbreviatedOid": "c0bdf9e"
+          },
+          "author": "abtink",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-05-04T22:05:51Z",
+          "updatedAt": "2023-05-04T22:05:51Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "I think we should keep \"the\" in this sentence since this rule applies to each discovered partner. We have this sentence right before this:\r\n>  ... it can enter \"routine operation\" state after one of the following conditions are met for every partner it discovered during the discovery interval:\r\n> 1) The new partner has established an SRPL session with the discovered partner and successfully finished initial synchronization...\r\n\r\n",
+              "createdAt": "2023-05-04T22:05:51Z",
+              "updatedAt": "2023-05-04T22:05:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOG2KAPs5UR6qc",
+          "commit": {
+            "abbreviatedOid": "c0bdf9e"
+          },
+          "author": "abtink",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-05-04T22:05:54Z",
+          "updatedAt": "2023-05-04T22:05:54Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Same here. This condition is applied per discovered partner (applying to each)",
+              "createdAt": "2023-05-04T22:05:54Z",
+              "updatedAt": "2023-05-04T22:05:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOG2KAPs5UR7Ke",
+          "commit": {
+            "abbreviatedOid": "c0bdf9e"
+          },
+          "author": "jwhui",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-05-04T22:08:21Z",
+          "updatedAt": "2023-05-04T22:08:21Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "Ah, yes, I missed that.",
+              "createdAt": "2023-05-04T22:08:21Z",
+              "updatedAt": "2023-05-04T22:08:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOG2KAPs5UR8db",
+          "commit": {
+            "abbreviatedOid": "c0bdf9e"
+          },
+          "author": "Abhayakara",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-05-04T22:13:22Z",
+          "updatedAt": "2023-05-04T22:13:23Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "The right flow is to discuss the change on the mailing list, and then implement it here. The above discussion would normally be done on the mailing list. Otherwise it's an isolated conversation and you're not really getting the benefit of working group review.",
+              "createdAt": "2023-05-04T22:13:22Z",
+              "updatedAt": "2023-05-04T22:13:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOG2KAPs5UR81V",
+          "commit": {
+            "abbreviatedOid": "c0bdf9e"
+          },
+          "author": "jwhui",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-05-04T22:15:29Z",
+          "updatedAt": "2023-05-04T22:15:30Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "SGTM.\r\n\r\n@abtink , let's propose all changes on the mailing list first.",
+              "createdAt": "2023-05-04T22:15:29Z",
+              "updatedAt": "2023-05-04T22:15:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOG2KAPs5UR9Bq",
+          "commit": {
+            "abbreviatedOid": "c0bdf9e"
+          },
+          "author": "abtink",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-05-04T22:16:37Z",
+          "updatedAt": "2023-05-04T22:16:37Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "Please see https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/pull/10#issuecomment-1535478461 below. I will post link t the PR at the end of same mailing chain.",
+              "createdAt": "2023-05-04T22:16:37Z",
+              "updatedAt": "2023-05-04T22:16:37Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
