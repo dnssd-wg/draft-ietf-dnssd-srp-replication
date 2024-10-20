@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-05-07T01:01:25.479912+00:00",
+  "timestamp": "2024-10-20T01:16:15.818396+00:00",
   "repo": "dnssd-wg/draft-ietf-dnssd-srp-replication",
   "labels": [
     {
@@ -57,14 +57,52 @@
       "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/issues/9",
       "state": "OPEN",
       "author": "EskoDijk",
-      "authorAssociation": "NONE",
-      "assignees": [],
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "abtink"
+      ],
       "labels": [],
       "body": "Search for string \"853\" in text to find the instances. This needs to be reformulated to allowing any (free?) port number.",
       "createdAt": "2023-04-30T11:19:50Z",
-      "updatedAt": "2023-04-30T11:19:50Z",
+      "updatedAt": "2023-11-12T21:24:41Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "EskoDijk",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@abtink can I assign this to you?",
+          "createdAt": "2023-09-19T07:41:45Z",
+          "updatedAt": "2023-09-19T07:41:45Z"
+        },
+        {
+          "author": "abtink",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Sure. (not sure how soon I can get back to anything SRPL related though). ",
+          "createdAt": "2023-09-19T16:38:47Z",
+          "updatedAt": "2023-09-19T16:38:47Z"
+        },
+        {
+          "author": "EskoDijk",
+          "authorAssociation": "COLLABORATOR",
+          "body": "(I found that I don't have rights to assign issues.)",
+          "createdAt": "2023-11-01T08:52:25Z",
+          "updatedAt": "2023-11-01T08:52:25Z"
+        },
+        {
+          "author": "jwhui",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I just assigned this to @abtink ",
+          "createdAt": "2023-11-01T16:23:45Z",
+          "updatedAt": "2023-11-01T16:23:45Z"
+        },
+        {
+          "author": "moonshiner",
+          "authorAssociation": "NONE",
+          "body": "\r\nThis is the only place I see this:\r\n\r\n       <t>SRP replication uses <xref target=\"RFC7858\">DNS port 853</xref> and is based on <xref target=\"RFC8490\">DNS Stateful Operations</xref>. Therefore, the SRV record for the example we've given would be:</t>\r\n\r\n        <t>example-host._srpl-tls._tcp.local. IN SRV 0 0 853 example-host.local.</t>\r\n",
+          "createdAt": "2023-11-12T21:24:41Z",
+          "updatedAt": "2023-11-12T21:24:41Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -253,26 +291,42 @@
       "id": "PR_kwDOG2KAPs5NHlNR",
       "title": "larger partner ID",
       "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/pull/7",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "abtink",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Related [discussion on dns-sd mailing list](https://mailarchive.ietf.org/arch/msg/dnssd/L3yzip6Ja0-sDT5gXuGnrapOYqc/).",
       "createdAt": "2023-03-29T01:33:17Z",
-      "updatedAt": "2023-05-04T22:43:41Z",
+      "updatedAt": "2024-03-04T22:19:14Z",
       "baseRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
       "baseRefName": "main",
       "baseRefOid": "ac17d9791b9bdc51a177728b01bf96d94ad95f31",
       "headRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
       "headRefName": "abtink/chnage-pid-compare-rule",
       "headRefOid": "8e31a769d6a0d46d38c1bfa402e1aff9e7722fe1",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-03-04T22:19:10Z",
+      "mergedAt": "2024-03-04T22:19:10Z",
+      "mergedBy": "jwhui",
+      "mergeCommit": {
+        "oid": "c9ee022362b572ca4fd16908747b499b1fbc54bf"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOG2KAPs5yK7XZ",
+          "commit": {
+            "abbreviatedOid": "8e31a76"
+          },
+          "author": "jwhui",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-04T22:19:03Z",
+          "updatedAt": "2024-03-04T22:19:03Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 8,
@@ -307,24 +361,26 @@
       "id": "PR_kwDOG2KAPs5Pz8UQ",
       "title": "More details on start state and entering routine operation",
       "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/pull/10",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "abtink",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Related  [discussion on dnssd mailing list](https://mailarchive.ietf.org/arch/msg/dnssd/xVbh9g9DRcqUIIgTnnjF1Oc4EcA/).",
       "createdAt": "2023-05-04T20:18:07Z",
-      "updatedAt": "2023-05-04T22:26:31Z",
+      "updatedAt": "2024-03-04T22:21:35Z",
       "baseRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
       "baseRefName": "main",
       "baseRefOid": "ac17d9791b9bdc51a177728b01bf96d94ad95f31",
       "headRepository": "dnssd-wg/draft-ietf-dnssd-srp-replication",
       "headRefName": "abtink/more-detail-on-discovery-time",
       "headRefOid": "c0bdf9ea6ee1806df34b60b6eb3901cba0b53a39",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-03-04T22:21:32Z",
+      "mergedAt": "2024-03-04T22:21:32Z",
+      "mergedBy": "jwhui",
+      "mergeCommit": {
+        "oid": "5bec28939775ad10501ea7c4c13de4798ea09d0a"
+      },
       "comments": [
         {
           "author": "abtink",
@@ -332,6 +388,13 @@
           "body": "> I know that it's traditional in e.g. Matter and Thread to do work like this in the Jira or in github, but for IETF work this stuff should be announced on the mailing list. I don't think it's a bad thing to open an issue, but not everybody in the working group will see it if you don't also mention it on the mailing list.\r\n\r\n- This PR is adding what we already discussed in the mailing list earlier (I promised to add the clarifications)\r\n- I did add the link to the mailing list discussion in the PR description above already.\r\n\r\n----\r\n\r\nEdit: Just added the link PR on the same dns-sd [email chain](https://mailarchive.ietf.org/arch/msg/dnssd/VsDK52ig747QRMWW2qlLTcZAxwE/).\r\n\r\n@Abhayakara, @jwhui  I like us to follow the policy that every PR in this repo (making larger changes to the text) should provide a link to the related discussion on dns-sd mailing list. \r\n\r\n",
           "createdAt": "2023-05-04T22:15:04Z",
           "updatedAt": "2023-05-04T22:26:31Z"
+        },
+        {
+          "author": "moonshiner",
+          "authorAssociation": "NONE",
+          "body": "There should be a comma after \"To determine the larger Partner ID\"\r\n\r\n\"To determine the larger Partner ID,  implementations MUST use normal numerical value comparison unlike Dataset ID comparison which uses the Serial Number Arithmetic\"",
+          "createdAt": "2023-11-12T21:22:38Z",
+          "updatedAt": "2023-11-12T21:22:38Z"
         }
       ],
       "reviews": [
@@ -520,6 +583,19 @@
               "updatedAt": "2023-05-04T22:16:37Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOG2KAPs5yK79g",
+          "commit": {
+            "abbreviatedOid": "c0bdf9e"
+          },
+          "author": "jwhui",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-04T22:21:02Z",
+          "updatedAt": "2024-03-04T22:21:02Z",
+          "comments": []
         }
       ]
     }
