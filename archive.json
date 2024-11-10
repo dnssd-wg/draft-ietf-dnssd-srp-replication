@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-07T01:09:33.761938+00:00",
+  "timestamp": "2024-11-10T01:13:45.869291+00:00",
   "repo": "dnssd-wg/draft-ietf-dnssd-srp-replication",
   "labels": [
     {
@@ -103,6 +103,22 @@
           "updatedAt": "2023-11-12T21:24:41Z"
         }
       ]
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOG2KAPs6dcki_",
+      "title": "Scalability of replication when SRP Registrars also use Advertising Proxy",
+      "url": "https://github.com/dnssd-wg/draft-ietf-dnssd-srp-replication/issues/11",
+      "state": "OPEN",
+      "author": "EskoDijk",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Issue: if there are N replicating SRP Registrars on a link (e.g. it might be up to N=10 as for the Thread case), and also each SRP Registrar includes an Advertising Proxy, then a single mDNS query on the link would get up to N identical / similar answers from Advertising Proxies.\r\n\r\nThat's a lot of multicast traffic. Is there a way to avoid (too many) duplicate answers? Or can it be detected that another Proxy has already answered the mDNS query? (Based on known-answer suppression or so)",
+      "createdAt": "2024-11-07T16:15:31Z",
+      "updatedAt": "2024-11-07T16:19:55Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
