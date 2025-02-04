@@ -1,6 +1,6 @@
 # Automatic Replication of DNS-SD Service Registration Protocol Zones
 
-This is the working area for the IETF [DNSSD Working Group](https://datatracker.ietf.org/wg/dnssd/documents/) Internet-Draft, "Automatic Replication of DNS-SD Service Registration Protocol Zones".
+This is the working area for the IETF [DNSSD Working Group](https://datatracker.ietf.org/group/dnssd/documents/) Internet-Draft, "Automatic Replication of DNS-SD Service Registration Protocol Zones".
 
 * [Editor's Copy](https://dnssd-wg.github.io/draft-ietf-dnssd-srp-replication/#go.draft-ietf-dnssd-srp-replication.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-dnssd-srp-replication)
